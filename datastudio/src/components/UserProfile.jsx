@@ -13,7 +13,7 @@ const UserProfile = ({ toggleSidebar }) => {
         />
       </div>
       <div className="flex-1 mr-2">
-        <h3 className="text-md font-semibold text-gray-800">Emmanuel</h3>
+        <h3 className="text-md font-semibold text-gray-800">Jessica</h3>
         <p className="text-sm text-gray-500">Administrator</p>
       </div>
       <MenuIcon onClick={toggleSidebar} className="cursor-pointer" style={{ color: '#5B6B79' }} />
