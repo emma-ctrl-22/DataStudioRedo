@@ -9,10 +9,10 @@ const AddUser = () => {
           <span className="bg-red-100 p-1 rounded-md">Add User</span>
         </h1>
       </div>
-      <div className="flex flex-row  justify-between px-6">
+      <div className="flex flex-col  justify-between px-6">
 
-      <UserTables />
       <UserForm/>
+      <UserTables />
       </div>
     </div>
   );

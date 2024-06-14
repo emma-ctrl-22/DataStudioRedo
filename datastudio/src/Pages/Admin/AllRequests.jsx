@@ -4,12 +4,12 @@ import Box from "@mui/material/Box";
 import toast, { Toaster } from "react-hot-toast";
 
 const fakeRequests = [
-  { _id: "1", title: "Request 1", type: "Type 1", author: "Author 1" },
-  { _id: "2", title: "Request 2", type: "Type 2", author: "Author 2" },
-  { _id: "3", title: "Request 3", type: "Type 3", author: "Author 3" },
-  { _id: "4", title: "Request 4", type: "Type 4", author: "Author 4" },
-  { _id: "5", title: "Request 5", type: "Type 5", author: "Author 5" },
-  { _id: "6", title: "Request 6", type: "Type 6", author: "Author 6" },
+  { _id: "1", title: "Request 1", type: "CM Report", author: "Author 1" },
+  { _id: "2", title: "Request 2", type: "PM Report", author: "Author 2" },
+  { _id: "3", title: "Request 3", type: "PPM Report", author: "Author 3" },
+  { _id: "4", title: "Request 4", type: "CM Report", author: "Author 4" },
+  { _id: "5", title: "Request 5", type: "PM Report", author: "Author 5" },
+  { _id: "6", title: "Request 6", type: "PPM Report", author: "Author 6" },
 ];
 
 const fakeEngineers = [
