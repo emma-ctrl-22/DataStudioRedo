@@ -23,13 +23,13 @@ const UserTables = () => {
     <div className="p-4 w-full">
       {loading ? (
         <Box>
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
-          <Skeleton variant="rectangular" width="100%" height={40} />
+          <Skeleton variant="rectangular" width="100%" height={60} />
+          <Skeleton variant="rectangular" width="100%" height={60} />
+          <Skeleton variant="rectangular" width="100%" height={60} />
         </Box>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300 rounded-lg">
+          <table className="min-w-full bg-white border border-gray-500 rounded-lg">
             <thead className="bg-gray-100">
               <tr>
                 <th className="py-2 px-4 border-b border-gray-300 text-left">Username</th>
