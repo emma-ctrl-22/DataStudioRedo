@@ -5,3 +5,27 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+/* Example styles for custom scrollbar */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(155, 155, 155, 0.5) rgba(0, 0, 0, 0.1); /* track color thumb color */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px; /* width of the entire scrollbar */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1); /* color of the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(155, 155, 155, 0.5); /* color of the thumb */
+  border-radius: 4px; /* roundness of the thumb */
+  border: 2px solid rgba(0, 0, 0, 0.1); /* border around thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(155, 155, 155, 0.8); /* color of the thumb on hover */
+}
+

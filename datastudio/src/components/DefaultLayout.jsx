@@ -82,9 +82,9 @@ const DefaultLayout = ({ children }) => {
   const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as needed
 
   return (
-    <div className="flex w-full h-full">
+    <div className="flex w-full h-full bg-gray-100">
       {isMobile ? <MobileDropdownMenu /> : <SideNav />}
-      <main className=" flex-1 h-full  overflow-y-auto bg-gray-100">
+      <main className=" flex-1 h-full  overflow-y-auto bg-gray-100 custom-scrollbar">
         {children}
       </main>
     </div>

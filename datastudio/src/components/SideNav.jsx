@@ -18,7 +18,7 @@ const SideNav = () => {
 
   return (
     <div
-      className={`flex flex-col h-screen p-1 bg-white text-black border-r-2 border-gray-300 border-dotted ${
+      className={`flex flex-col h-screen p-1 bg-gray-100 text-black border-r-2 border-gray-300 border-dotted ${
         isCollapsed ? "w-20" : "w-60"
       } transition-width duration-300`}
     >
