@@ -84,7 +84,7 @@ const DefaultLayout = ({ children }) => {
   return (
     <div className="flex w-full h-full">
       {isMobile ? <MobileDropdownMenu /> : <SideNav />}
-      <main className="flex-1 h-full  overflow-y-auto">
+      <main className=" flex-1 h-full  overflow-y-auto bg-gray-400 p-0">
         {children}
       </main>
     </div>
