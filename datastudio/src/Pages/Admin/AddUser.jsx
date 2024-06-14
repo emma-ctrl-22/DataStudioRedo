@@ -1,6 +1,6 @@
 import React from "react";
 import { UserForm, UserTables } from "./components";
-
+import {Toaster} from 'react-hot-toast';
 const AddUser = () => {
   return (
     <div className="w-full h-fit flex flex-col">
@@ -10,10 +10,10 @@ const AddUser = () => {
         </h1>
       </div>
       <div className="flex flex-col  justify-between px-6">
-
       <UserForm/>
       <UserTables />
       </div>
+      <Toaster/>
     </div>
   );
 };
