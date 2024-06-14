@@ -28,7 +28,7 @@ const DoughnutChart = ({ values, title }) => {
 
   return (
     <div className="p-0">
-      <h2 className="text-sm font-semibold absolute z-10">{title}</h2>
+      <h2 className="text-sm font-semibold absolute z-10 mr-8">{title}</h2>
       <Chart type="doughnut" data={data} options={options} style={{ maxWidth: '100%' }} />
     </div>
   );
