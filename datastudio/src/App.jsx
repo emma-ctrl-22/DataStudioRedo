@@ -53,12 +53,12 @@ function App() {
             <ReportHistory />
           </DefaultLayout>
         } />
-      </Routes>
       <Route path="/client/create-request" element={
         <DefaultLayout>
           <CreateRequest />
         </DefaultLayout>
       } />
+      </Routes>
     </Router>
   );
 }

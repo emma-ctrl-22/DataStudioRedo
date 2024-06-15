@@ -1,13 +1,22 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import UserProfile from "./UserProfile";
-import { CreateNewFolderSharp,WorkHistorySharp,ArticleSharp,HomeSharp,PersonAdd,ReportOffSharp } from "@mui/icons-material";
+import {
+  CreateNewFolderSharp,
+  WorkHistorySharp,
+  ArticleSharp,
+  HomeSharp,
+  PersonAdd,
+  ReportOffSharp,
+  ContactSupportSharp,
+  DescriptionSharp,
+} from "@mui/icons-material";
 
 const SideNav = () => {
   const [userInfo, setUserInfo] = useState({
-    role: "engineer",
+    role: "client", // Change role here to 'client' to simulate client role
   });
-  const [isCollapsed, setIsCollapsed] = useState(false); 
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
 
   const toggleSidebar = () => {
@@ -140,6 +149,65 @@ const SideNav = () => {
                       className="w-4 h-4"
                     />
                     {!isCollapsed && <span>Report History</span>}
+                  </NavLink>
+                </li>
+              </>
+            )}
+
+            {userInfo.role === "client" && (
+              <>
+                <li className="rounded-sm">
+                  <NavLink
+                    to="/client/create-request"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                    }
+                  >
+                    <CreateNewFolderSharp
+                      style={{
+                        color: location.pathname === "/client/create-request" ? "#930006" : "#5B6B79",
+                      }}
+                      className="w-4 h-4"
+                    />
+                    {!isCollapsed && <span>Create Request</span>}
+                  </NavLink>
+                </li>
+                <li className="rounded-sm">
+                  <NavLink
+                    to="/client/requests"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                    }
+                  >
+                    <WorkHistorySharp
+                      style={{
+                        color: location.pathname === "/client/requests" ? "#930006" : "#5B6B79",
+                      }}
+                      className="w-4 h-4"
+                    />
+                    {!isCollapsed && <span>Requests</span>}
+                  </NavLink>
+                </li>
+                <li className="rounded-sm">
+                  <NavLink
+                    to="/client/official-reports"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                    }
+                  >
+                    <DescriptionSharp
+                      style={{
+                        color: location.pathname === "/client/official-reports" ? "#930006" : "#5B6B79",
+                      }}
+                      className="w-4 h-4"
+                    />
+                    {!isCollapsed && <span>Official Reports</span>}
                   </NavLink>
                 </li>
               </>
