@@ -5,7 +5,10 @@ import ArticleIcon from "@mui/icons-material/Article";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ReportIcon from "@mui/icons-material/Report";
 import UserProfile from "./UserProfile";
+import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
+import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import datastudio from "../assets/datastudio.png";
+import { CreateNewFolderSharp ,WorkHistorySharp} from "@mui/icons-material";
 
 const SideNav = () => {
   const [userInfo, setUserInfo] = useState({
@@ -119,9 +122,9 @@ const SideNav = () => {
                         : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
                     }
                   >
-                    <ArticleIcon
+                    <CreateNewFolderSharp
                       style={{
-                        color: location.pathname === "/create-report" ? "#930006" : "#5B6B79",
+                        color: location.pathname === "/engineer/create-report" ? "#930006" : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -137,9 +140,9 @@ const SideNav = () => {
                         : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
                     }
                   >
-                    <ArticleIcon
+                    <WorkHistorySharp
                       style={{
-                        color: location.pathname === "/report-history" ? "#930006" : "#5B6B79",
+                        color: location.pathname === "/engineer/report-history" ? "#930006" : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
