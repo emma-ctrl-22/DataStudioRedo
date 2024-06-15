@@ -1,20 +1,13 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
-import ArticleIcon from "@mui/icons-material/Article";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import ReportIcon from "@mui/icons-material/Report";
 import UserProfile from "./UserProfile";
-import CreateNewFolderIcon from '@mui/icons-material/CreateNewFolder';
-import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
-import datastudio from "../assets/datastudio.png";
-import { CreateNewFolderSharp ,WorkHistorySharp} from "@mui/icons-material";
+import { CreateNewFolderSharp ,WorkHistorySharp ,ArticleSharp,HomeSharp,PersonAdd,ReportOffSharp} from "@mui/icons-material";
 
 const SideNav = () => {
   const [userInfo, setUserInfo] = useState({
-    role: "engineer", // Initial role ('admin' or 'engineer')
+    role: "engineer",
   });
-  const [isCollapsed, setIsCollapsed] = useState(false); // Initial sidebar state [true: collapsed, false: expanded
+  const [isCollapsed, setIsCollapsed] = useState(false); 
   const location = useLocation();
 
   const toggleSidebar = () => {
@@ -45,7 +38,7 @@ const SideNav = () => {
                         : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
                     }
                   >
-                    <HomeIcon
+                    <HomeSharp
                       style={{
                         color: location.pathname === "/admin/dashboard" ? "#930006" : "#5B6B79",
                       }}
@@ -63,7 +56,7 @@ const SideNav = () => {
                         : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
                     }
                   >
-                    <PersonAddIcon
+                    <PersonAdd
                       style={{
                         color: location.pathname === "/admin/add-user" ? "#930006" : "#5B6B79",
                       }}
@@ -81,7 +74,7 @@ const SideNav = () => {
                         : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
                     }
                   >
-                    <ArticleIcon
+                    <ArticleSharp
                       style={{
                         color: location.pathname === "/admin/reports" ? "#930006" : "#5B6B79",
                       }}
@@ -99,7 +92,7 @@ const SideNav = () => {
                         : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
                     }
                   >
-                    <ReportIcon
+                    <ReportOffSharp
                       style={{
                         color: location.pathname === "/admin/requests" ? "#930006" : "#5B6B79",
                       }}
