@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Skeleton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Modal, Box, Button } from '@mui/material';
-import {ReportCreationModal} from './components'
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import {Skeleton,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Modal,Box,Button,} from "@mui/material";
+import { ReportCreationModal } from "./components";
 
 // Fake JSON data for simulation
 const fakeRequests = [
-  { _id: '1', type: 'Type 1', author: 'Author 1' },
-  { _id: '2', type: 'Type 2', author: 'Author 2' },
-  { _id: '3', type: 'Type 3', author: 'Author 3' },
+  { _id: "1", type: "Type 1", author: "Author 1" },
+  { _id: "2", type: "Type 2", author: "Author 2" },
+  { _id: "3", type: "Type 3", author: "Author 3" },
 ];
 
 const CreateReport = () => {
@@ -30,7 +30,12 @@ const CreateReport = () => {
   };
 
   return (
-    <div>
+    <div className="py-4 px-8">
+      <div className="mt-3 mb-3 rounded-md">
+        <h1 className="text-md text-left text-red-500 ">
+          <span className="bg-red-100 p-1 rounded-md">Create Report</span>
+        </h1>
+      </div>
       {loading ? (
         <Skeleton variant="rectangular" width="100%" height={400} />
       ) : (

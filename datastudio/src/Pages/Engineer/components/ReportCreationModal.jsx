@@ -19,27 +19,43 @@ const ReportCreationModal = ({
   const [furtherWorkDesc, setFurtherWorkDesc] = useState(defaultValues.furtherWorkDesc || "");
   const [reportType, setReportType] = useState(defaultValues.type || "");
 
-  const [errors, setErrors] = useState({});
-
   if (!isOpen) return null;
 
   const validateForm = () => {
-    const newErrors = {};
-
-    if (!facilityName) newErrors.facilityName = "Facility Name is required";
-    if (!equipmentName) newErrors.equipmentName = "Equipment Name is required";
-    if (!problemDesc) newErrors.problemDesc = "Problem Description is required";
-    if (!workDone) newErrors.workDone = "Work Done is required";
-    if (!reportType) newErrors.reportType = "Report Type is required";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    if (!facilityName) {
+      toast.error("Facility Name is required");
+      return false;
+    }
+    if (!equipmentName) {
+      toast.error("Equipment Name is required");
+      return false;
+    }
+    if (!serialNumber) {
+      toast.error("Serial Number is required");
+      return false;
+    }
+    if (!modelNumber) {
+      toast.error("Model Number is required");
+      return false;
+    }
+    if (!problemDesc) {
+      toast.error("Problem Description is required");
+      return false;
+    }
+    if (!workDone) {
+      toast.error("Work Done is required");
+      return false;
+    }
+    if (reportType ==="") {
+      toast.error("Report Type is required");
+      return false;
+    }
+    return true;
   };
 
   const makeReport = (e) => {
     e.preventDefault();
     if (!validateForm()) {
-      toast.error("Please fill all required fields");
       return;
     }
 
@@ -87,19 +103,16 @@ const ReportCreationModal = ({
               value={facilityName}
               onChange={(e) => setFacilityName(e.target.value)}
               placeholder="Facility Name"
-              className={`w-full p-2 border ${errors.facilityName ? 'border-red-500' : 'border-gray-300'} rounded`}
+              className="w-full p-2 border border-gray-300 rounded"
             />
-            {errors.facilityName && <p className="text-red-500 text-sm">{errors.facilityName}</p>}
           </div>
           <div>
             <input
               value={equipmentName}
               onChange={(e) => setEquipmentName(e.target.value)}
               placeholder="Equipment Name"
-              required
-              className={`w-full p-2 border ${errors.equipmentName ? 'border-red-500' : 'border-gray-300'} rounded`}
+              className="w-full p-2 border border-gray-300 rounded"
             />
-            {errors.equipmentName && <p className="text-red-500 text-sm">{errors.equipmentName}</p>}
           </div>
           <div>
             <input
@@ -122,18 +135,16 @@ const ReportCreationModal = ({
               value={problemDesc}
               onChange={(e) => setProblemDesc(e.target.value)}
               placeholder="Problem Description"
-              className={`w-full p-2 border ${errors.problemDesc ? 'border-red-500' : 'border-gray-300'} rounded`}
+              className="w-full p-2 border border-gray-300 rounded"
             />
-            {errors.problemDesc && <p className="text-red-500 text-sm">{errors.problemDesc}</p>}
           </div>
           <div>
             <textarea
               value={workDone}
               onChange={(e) => setWorkDone(e.target.value)}
               placeholder="Work Done"
-              className={`w-full p-2 border ${errors.workDone ? 'border-red-500' : 'border-gray-300'} rounded`}
+              className="w-full p-2 border border-gray-300 rounded"
             />
-            {errors.workDone && <p className="text-red-500 text-sm">{errors.workDone}</p>}
           </div>
           <div>
             <select
@@ -159,8 +170,7 @@ const ReportCreationModal = ({
             <select
               value={reportType}
               onChange={(e) => setReportType(e.target.value)}
-              required
-              className={`w-full p-2 border ${errors.reportType ? 'border-red-500' : 'border-gray-300'} rounded`}
+              className="w-full p-2 border border-gray-300 rounded"
             >
               <option value="">Select Report Type</option>
               <option value="CMReport">CMReport</option>
@@ -168,7 +178,6 @@ const ReportCreationModal = ({
               <option value="PPMReport">PPMReport</option>
               <option value="regular">Regular</option>
             </select>
-            {errors.reportType && <p className="text-red-500 text-sm">{errors.reportType}</p>}
           </div>
           <div className="flex justify-end space-x-2">
             <button
