@@ -112,7 +112,7 @@ const SideNav = () => {
               <>
                 <li className="rounded-sm">
                   <NavLink
-                    to="/create-report"
+                    to="/engineer/create-report"
                     className={({ isActive }) =>
                       isActive
                         ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
@@ -130,7 +130,7 @@ const SideNav = () => {
                 </li>
                 <li className="rounded-sm">
                   <NavLink
-                    to="/report-history"
+                    to="/engineer/report-history"
                     className={({ isActive }) =>
                       isActive
                         ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"

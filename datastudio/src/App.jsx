@@ -41,6 +41,11 @@ function App() {
             </DefaultLayout>
           }
         />
+        <Route path="/engineer/create-report" element={
+          <DefaultLayout>
+            <CreateReport />
+          </DefaultLayout>
+        } />
       </Routes>
     </Router>
   );
