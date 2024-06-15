@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link, Routes, Route } from 'react-router-dom';
-import { Tabs, Tab, IconButton } from '@mui/material';
+import { Tabs, Tab} from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ConfirmedRequests,PendingRequests } from './components';
 
@@ -23,20 +23,6 @@ const Requests = () => {
   const currentTab = location.pathname.split('/')[2] || 'confirmed-requests';
 
   const [openTabs, setOpenTabs] = useState(tabsData);
-
-  const handleTabClose = (tabValue) => {
-    setOpenTabs(prevTabs => {
-      const newTabs = prevTabs.filter(tab => tab.value !== tabValue);
-      if (currentTab === tabValue && newTabs.length > 0) {
-        // Navigate to the first tab if the current tab is closed
-        navigate(`/client/requests/${newTabs[0].value}`);
-      } else if (newTabs.length === 0) {
-        // Navigate to a fallback route if no tabs are open
-        navigate('/dashboard');
-      }
-      return newTabs;
-    });
-  };
   return (
     <ThemeProvider theme={theme}>
       <div>
