@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import UserProfile from "./UserProfile";
-import { CreateNewFolderSharp ,WorkHistorySharp ,ArticleSharp,HomeSharp,PersonAdd,ReportOffSharp} from "@mui/icons-material";
+import { CreateNewFolderSharp,WorkHistorySharp,ArticleSharp,HomeSharp,PersonAdd,ReportOffSharp } from "@mui/icons-material";
 
 const SideNav = () => {
   const [userInfo, setUserInfo] = useState({

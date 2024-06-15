@@ -57,7 +57,7 @@ const ReportHistory = () => {
           placeholder="Search by equipment name or serial number"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-full border border-gray-300 outline-none pl-5 font-inter text-xl rounded-md"
+          className="w-full h-full border border-gray-300 outline-none pl-2 font-inter text-xl rounded-md"
         />
       </div>
       {loading ? (
