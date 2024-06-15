@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./Pages/Authentication/Login"; 
 import { Dashboard, AddUser, AllReports, AllRequests } from "./Pages/Admin"; 
 import { CreateReport ,ReportHistory} from "./Pages/Engineer";
-import DefaultLayout from "./components/DefaultLayout";
+import {DefaultLayout} from "./components";
+import { CreateRequest } from "./Pages/Client";
 
 function App() {
   return (
@@ -53,6 +54,11 @@ function App() {
           </DefaultLayout>
         } />
       </Routes>
+      <Route path="/client/create-request" element={
+        <DefaultLayout>
+          <CreateRequest />
+        </DefaultLayout>
+      } />
     </Router>
   );
 }
