@@ -24,11 +24,11 @@ const ConfirmedRequests = () => {
         <table className="w-full mt-4 bg-white border border-gray-400">
           <thead>
             <tr className="bg-gray-200">
-              <th className="py-2 px-4 border-b border-gray-300">Report ID</th>
-              <th className="py-2 px-4 border-b border-gray-300">Report Title</th>
-              <th className="py-2 px-4 border-b border-gray-300">Report Type</th>
-              <th className="py-2 px-4 border-b border-gray-300">Report Status</th>
-              <th className="py-2 px-4 border-b border-gray-300">Assigned To</th>
+            <th className="py-2 text-black  border-b border-gray-300">Report ID</th>
+              <th className="py-2 mr-4 text-black border-b border-gray-300">Report Title</th>
+              <th className="py-2 px-4 border-b text-black border-gray-300">Report Type</th>
+              <th className="py-2 px-4 border-b text-black border-gray-300">Report Status</th>
+              <th className="py-2 px-4 border-b text-black border-gray-300">Assigned To</th>
             </tr>
           </thead>
           <tbody>
