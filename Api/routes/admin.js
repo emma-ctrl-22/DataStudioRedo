@@ -59,6 +59,10 @@ router.put("/assign-request/:requestId", async (req, res) => {
   }
 });
 
+
+
+//////////////////////////////////////////// Dahboard Routes//////////////////////////////////////////////////////
+
 // Route to get totals and daily report count
 router.get("/totals", async (req, res) => {
   try {
@@ -72,10 +76,20 @@ router.get("/totals", async (req, res) => {
       createdAt: { $gte: today }
     });
 
+    const completedRequests = await Request.countDocuments({
+      status: "done"
+    });
+
+    const uncompletedRequests = await Request.countDocuments({
+      status: "Pending"
+    });
+
     res.json({
       totalReports,
       totalRequests,
       dailyReports,
+      completedRequests,
+      uncompletedRequests,
     });
   } catch (err) {
     console.error("Error fetching totals:", err);
