@@ -7,6 +7,10 @@ const User = require('../models/User');
 // Secret key for JWT
 const JWT_SECRET = 'your_jwt_secret';
 
+router.get('/', (req, res) => {
+    res.send('Auth Home');
+});
+
 // Register a new user
 router.post('/register', async (req, res) => {
     const { name, email, phone, role, password } = req.body;
@@ -51,12 +55,12 @@ router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(400).json({ message: 'Invalid email or password' });
+            return res.status(400).json({ message: 'Invalid email' });
         }
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
-            return res.status(400).json({ message: 'Invalid email or password' });
+            return res.status(400).json({ message: 'Invalid password' });
         }
 
         const token = jwt.sign({ id: user._id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });

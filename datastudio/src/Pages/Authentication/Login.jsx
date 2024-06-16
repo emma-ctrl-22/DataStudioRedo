@@ -1,8 +1,9 @@
-import { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LogoImage from "../../assets/LogoImage.svg";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import  AuthContext  from "../../Context/AuthContext"; // Update this path based on your project structure
 import bgImage from "../../assets/bg3.jpg";
 
 const Login = () => {
@@ -15,7 +16,9 @@ const Login = () => {
   };
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const { login } = useContext(AuthContext);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(email, password);
     if (email === "") {
@@ -27,19 +30,22 @@ const Login = () => {
         icon: "🤦‍♂️",
       });
     } else {
-      // onSuccess(); // Define this function if needed
-      toast.success("Login successful!");
-      // Redirect to the dashboard
-      setTimeout(() => {
-        navigate("/admin/dashboard");
-      }, 2000);
+      try {
+        const status = await login(email, password);
+        if (status === 200) {
+          toast.success("Login successful!");
+          setTimeout(() => {
+            navigate("/admin/dashboard");
+          }, 2000);
+        }
+      } catch (error) {
+        toast.error("Login failed! Please check your credentials.");
+      }
     }
   };
 
   return (
-    <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-blue-400 bg-center p-4 sm:p-0 "
-    >
+    <div className="flex items-center justify-center min-h-screen bg-cover bg-blue-400 bg-center p-4 sm:p-0 ">
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-4 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-gray-300 rounded-lg p-6 sm:p-8 w-full max-w-md mx-auto shadow-lg"
