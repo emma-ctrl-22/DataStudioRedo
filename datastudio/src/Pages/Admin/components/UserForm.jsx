@@ -4,6 +4,7 @@ const UserForm = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
 
   const handleSubmit = (e) => {
@@ -64,6 +65,16 @@ const UserForm = () => {
           <option value="Client">Client</option>
           <option value="Engineer">Engineer</option>
         </select>
+      </div>
+      <div className="col-span-1">
+        <label className="block text-gray-700">Password</label>
+        <input
+          type='password'
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
       </div>
       <div className="col-span-3 flex justify-end">
         <button
