@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -22,32 +22,8 @@ const ReportCreationModal = ({
   if (!isOpen) return null;
 
   const validateForm = () => {
-    if (!facilityName) {
-      toast.error("Facility Name is required");
-      return false;
-    }
-    if (!equipmentName) {
-      toast.error("Equipment Name is required");
-      return false;
-    }
-    if (!serialNumber) {
-      toast.error("Serial Number is required");
-      return false;
-    }
-    if (!modelNumber) {
-      toast.error("Model Number is required");
-      return false;
-    }
-    if (!problemDesc) {
-      toast.error("Problem Description is required");
-      return false;
-    }
-    if (!workDone) {
-      toast.error("Work Done is required");
-      return false;
-    }
-    if (reportType ==="") {
-      toast.error("Report Type is required");
+    if (!facilityName || !equipmentName || !serialNumber || !modelNumber || !problemDesc || !workDone || reportType === "") {
+      toast.error("Please fill in all required fields.");
       return false;
     }
     return true;
@@ -58,22 +34,24 @@ const ReportCreationModal = ({
     if (!validateForm()) {
       return;
     }
-
+ const Engineer = "Emmanuel Nyatepe"; // Replace with the actual engineer name
     const reportDetails = {
-      FacilityName: facilityName,
-      EquipmentName: equipmentName,
-      SerialNumber: serialNumber,
+      Engineer: Engineer,
+      facilityName: facilityName,
+      equipmentName: equipmentName,
+      serialNumber: serialNumber,
       modelNumber: modelNumber,
-      ProblemDesc: problemDesc,
-      WorkDone: workDone,
-      FurtherWorks: furtherWorks,
-      FurtherWorkDesc: furtherWorks === "true" ? furtherWorkDesc : "",
+      problemDesc: problemDesc,
+      workDone: workDone,
+      furtherWorks: furtherWorks,
+      furtherWorkDesc: furtherWorks === "true" ? furtherWorkDesc : "",
       type: reportType,
-      requestId: selectedRequestId,
+      selectedRequestId: selectedRequestId, // Include the selectedRequestId here
     };
+    console.log("Report details:", reportDetails);
 
     axios
-      .post("http://localhost:8080/createreport", reportDetails)
+      .post("http://localhost:8080/api/engineer/create-report-and-update-status", reportDetails)
       .then((res) => {
         toast.success("Report Created Successfully");
         setFacilityName("");
@@ -86,9 +64,10 @@ const ReportCreationModal = ({
         setFurtherWorkDesc("");
         setReportType("");
         onClose();
-        onSubmit(reportDetails);
+        onSubmit(reportDetails); // Pass reportDetails to onSubmit callback if needed
       })
       .catch((error) => {
+        console.error("Failed to create report:", error);
         toast.error("Failed to create report");
       });
   };

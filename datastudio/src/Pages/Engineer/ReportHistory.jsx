@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Skeleton, Modal } from '@mui/material';
+import axios from 'axios'; // Import Axios
 import { ReportModal } from './components';
-
-const fakeReports = [
-  { _id: '1', FacilityName: 'Facility 1', SerialNumber: 'SN001', EquipmentName: 'Equipment 1' },
-  { _id: '2', FacilityName: 'Facility 2', SerialNumber: 'SN002', EquipmentName: 'Equipment 2' },
-  { _id: '3', FacilityName: 'Facility 3', SerialNumber: 'SN003', EquipmentName: 'Equipment 3' },
-  { _id: '4', FacilityName: 'Facility 3', SerialNumber: 'SN004', EquipmentName: 'Equipment 4' },
-  { _id: '5', FacilityName: 'Facility 3', SerialNumber: 'SN005', EquipmentName: 'Equipment 5' },
-  { _id: '6', FacilityName: 'Facility 3', SerialNumber: 'SN006', EquipmentName: 'Equipment 6' },
-  { _id: '7', FacilityName: 'Facility 3', SerialNumber: 'SN007', EquipmentName: 'Equipment 7' },
-  { _id: '8', FacilityName: 'Facility 3', SerialNumber: 'SN008', EquipmentName: 'Equipment 8' },
-  { _id: '9', FacilityName: 'Facility 3', SerialNumber: 'SN009', EquipmentName: 'Equipment 9' },
-];
 
 const ReportHistory = () => {
   const [loading, setLoading] = useState(true);
@@ -21,10 +10,18 @@ const ReportHistory = () => {
   const [selectedReport, setSelectedReport] = useState(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      setReports(fakeReports);
-      setLoading(false);
-    }, 2000);
+    const fetchReports = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/engineer/reports'); // Adjust the URL as per your setup
+        setReports(response.data); // Assuming your API returns an array of reports
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching reports:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchReports();
   }, []);
 
   const openModal = (report) => {

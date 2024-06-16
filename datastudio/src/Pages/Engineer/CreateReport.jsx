@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {Skeleton,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Modal,Box,Button,} from "@mui/material";
+import { Skeleton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Modal, Box, Button } from "@mui/material";
 import { ReportCreationModal } from "./components";
-
-// Fake JSON data for simulation
-const fakeRequests = [
-  { _id: "1", type: "Type 1", author: "Author 1" },
-  { _id: "2", type: "Type 2", author: "Author 2" },
-  { _id: "3", type: "Type 3", author: "Author 3" },
-];
 
 const CreateReport = () => {
   const [loading, setLoading] = useState(true);
@@ -17,12 +10,22 @@ const CreateReport = () => {
   const [selectedRequest, setSelectedRequest] = useState(null);
 
   useEffect(() => {
-    // Simulate an API call
-    setTimeout(() => {
-      setAssignedRequests(fakeRequests);
-      setLoading(false);
-    }, 2000);
+    fetchAssignedRequests();
   }, []);
+
+  const fetchAssignedRequests = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/engineer/requests", {
+        params: {
+          name: "Emmanuel Nyatepe" // Replace with dynamic name if needed
+        }
+      });
+      setAssignedRequests(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching assigned requests:", error);
+    }
+  };
 
   const handleReportSubmit = (reportDetails) => {
     console.log("Report submitted: ", reportDetails);
