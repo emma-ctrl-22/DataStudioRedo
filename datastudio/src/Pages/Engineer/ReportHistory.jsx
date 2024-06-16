@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Skeleton, Modal } from '@mui/material';
 import { ReportModal } from './components';
 
-// Fake JSON data for simulation
 const fakeReports = [
   { _id: '1', FacilityName: 'Facility 1', SerialNumber: 'SN001', EquipmentName: 'Equipment 1' },
   { _id: '2', FacilityName: 'Facility 2', SerialNumber: 'SN002', EquipmentName: 'Equipment 2' },
@@ -13,7 +12,6 @@ const fakeReports = [
   { _id: '7', FacilityName: 'Facility 3', SerialNumber: 'SN007', EquipmentName: 'Equipment 7' },
   { _id: '8', FacilityName: 'Facility 3', SerialNumber: 'SN008', EquipmentName: 'Equipment 8' },
   { _id: '9', FacilityName: 'Facility 3', SerialNumber: 'SN009', EquipmentName: 'Equipment 9' },
-  // Add more fake data as needed
 ];
 
 const ReportHistory = () => {
@@ -23,7 +21,6 @@ const ReportHistory = () => {
   const [selectedReport, setSelectedReport] = useState(null);
 
   useEffect(() => {
-    // Simulate an API call
     setTimeout(() => {
       setReports(fakeReports);
       setLoading(false);

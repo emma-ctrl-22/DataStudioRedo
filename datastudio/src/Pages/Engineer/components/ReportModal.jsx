@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from '@mui/material';
 
 const ReportModal = ({ report, onClose }) => (
@@ -23,6 +22,9 @@ const ReportModal = ({ report, onClose }) => (
     <div className="flex justify-end">
       <Button variant="contained" color="secondary" onClick={onClose}>
         Close
+      </Button>
+      <Button variant="contained" color="secondary" onClick={onClose}>
+        Download PDF
       </Button>
     </div>
   </div>

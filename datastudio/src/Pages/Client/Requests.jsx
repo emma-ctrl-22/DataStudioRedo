@@ -7,7 +7,7 @@ import { ConfirmedRequests,PendingRequests } from './components';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#930006', // red color for the indicator
+      main: '#930006',
     },
   },
 });
@@ -33,7 +33,6 @@ const Requests = () => {
               label={
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                   {tab.label}
-                  
                 </div>
               }
               value={tab.value}

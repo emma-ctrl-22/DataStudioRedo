@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import {
@@ -8,13 +8,12 @@ import {
   HomeSharp,
   PersonAdd,
   ReportOffSharp,
-  ContactSupportSharp,
   DescriptionSharp,
 } from "@mui/icons-material";
 
 const SideNav = () => {
   const [userInfo, setUserInfo] = useState({
-    role: "client", // Change role here to 'client' to simulate client role
+    role: "admin", // Change role here to 'client' to simulate client role
   });
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
