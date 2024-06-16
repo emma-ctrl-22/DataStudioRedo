@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Skeleton, Modal } from '@mui/material';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
 import { ReportModal } from './components';
 
 const ReportHistory = () => {
@@ -12,8 +12,8 @@ const ReportHistory = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/engineer/reports'); // Adjust the URL as per your setup
-        setReports(response.data); // Assuming your API returns an array of reports
+        const response = await axios.get('http://localhost:8080/api/engineer/reports');
+        setReports(response.data);
         setLoading(false);
       } catch (error) {
         console.error('Error fetching reports:', error);
@@ -37,6 +37,9 @@ const ReportHistory = () => {
       report.EquipmentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       report.SerialNumber.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  // Reverse the array to display most recent reports first
+  const reversedReports = [...filteredReports].reverse();
 
   return (
     <div className="relative p-5">
@@ -73,7 +76,7 @@ const ReportHistory = () => {
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {filteredReports.map((report) => (
+              {reversedReports.map((report) => (
                 <tr className="border-b" key={report._id}>
                   <td className="px-6 py-1 border-r">{report._id}</td>
                   <td className="px-6 py-1 border-r">{report.FacilityName}</td>
