@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import * as jwt_decode from "jwt-decode"; // Correct default import
 import toast, { Toaster } from "react-hot-toast";
 
 export const AuthContext = createContext();
@@ -21,10 +21,11 @@ export const AuthProvider = ({ children }) => {
         setIsCredentialsLegit(true);
         toast.success('Logged in Successfully');
         const { token } = res.data;
+        console.log("Login successful", token);
         const decodedToken = jwt_decode(token);
         const { id, email, role, username } = decodedToken;
-
         const UserInfo = { id, email, role, username };
+        console.log(UserInfo);
         setUserInfo(UserInfo);
         setUserToken(token);
         localStorage.setItem("userInfo", JSON.stringify(UserInfo));
