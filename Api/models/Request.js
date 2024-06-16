@@ -16,11 +16,13 @@ const reportSchema = new mongoose.Schema({
     },
     AssignTo:{
         type: String,
-        default:"anyone"
+        default:"anyone",
+        required: false
     },
     status:{
         type:String,
-        default:"Pending"
+        default:"Pending",
+        required: false
     },
     type:{
         type: String,

@@ -1,32 +1,47 @@
 import React, { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
+import axios from 'axios'; // Import Axios
 
 const CreateRequest = () => {
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
-  const [serialNumber, setSerialNumber] = useState('');
+  const author="nico@gmail.com"
 
-  const sendRequest = (e) => {
+  const sendRequest = async (e) => {
     e.preventDefault();
 
     // Validation
-    if (!title || !type || !description || !serialNumber) {
+    if (!title || !type || !description) {
       toast.error('All fields are required!');
       return;
     }
 
-    // Send request logic goes here
-    console.log('Submitting request...', { title, type, description, serialNumber });
+    const requestData = {
+      author,
+      title,
+      type,
+      desc: description,
+    };
 
-    // Clear form after submission (optional)
-    setTitle('');
-    setType('');
-    setDescription('');
-    setSerialNumber('');
+    try {
+      const response = await axios.post('http://localhost:8080/api/client/create-requests', requestData);
 
-    // Show success message
-    toast.success('Request submitted successfully!');
+      // Handle success
+      console.log('Response:', response.data);
+
+      // Clear form after successful submission
+      setTitle('');
+      setType('');
+      setDescription('');
+
+      // Show success message
+      toast.success('Request submitted successfully!');
+    } catch (error) {
+      // Handle error
+      console.error('Error:', error);
+      toast.error('Failed to submit request. Please try again.');
+    }
   };
 
   return (
@@ -50,9 +65,9 @@ const CreateRequest = () => {
             />
           </label>
           <label className="mt-4">
-  <span className="text-sm text-left" style={{ fontFamily: 'Montserrat', color: 'white' }}>
-    Request Type
-  </span>
+            <span className="text-sm text-left" style={{ fontFamily: 'Montserrat', color: 'white' }}>
+              Request Type
+            </span>
             <select
               value={type}
               onChange={(e) => setType(e.target.value)}
@@ -79,18 +94,6 @@ const CreateRequest = () => {
               className="block w-full mt-1 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:bg-gray-700"
               style={{ fontFamily: 'Montserrat', color: 'white' }}
             ></textarea>
-          </label>
-          <label className="block mt-4">
-            <span className="text-sm" style={{ fontFamily: 'Montserrat', color: 'white' }}>
-              Serial Number
-            </span>
-            <input
-              type="text"
-              value={serialNumber}
-              onChange={(e) => setSerialNumber(e.target.value)}
-              placeholder="Enter Serial Number"
-              className="block w-full mt-1 px-3 py-2 rounded-md bg-gray-800 text-white focus:outline-none focus:bg-gray-700"
-            />
           </label>
           <button
             type="submit"

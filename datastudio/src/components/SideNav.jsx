@@ -13,7 +13,7 @@ import {
 
 const SideNav = () => {
   const [userInfo, setUserInfo] = useState({
-    role: "admin", // Change role here to 'client' to simulate client role
+    role: "client", // Change role here to 'client' to simulate client role
   });
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();

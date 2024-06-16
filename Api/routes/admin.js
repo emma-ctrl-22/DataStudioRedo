@@ -59,8 +59,6 @@ router.put("/assign-request/:requestId", async (req, res) => {
   }
 });
 
-
-
 //////////////////////////////////////////// Dahboard Routes//////////////////////////////////////////////////////
 
 // Route to get totals and daily report count
