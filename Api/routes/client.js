@@ -26,7 +26,7 @@ router.get('/requests-by-author', async (req, res) => {
     try {
         const requests = await Request.find({ author });
 
-        res.json({data:requests});
+        res.json(requests);
     } catch (err) {
         console.error("Error fetching requests by author:", err);
         res.status(500).json({ error: "Internal Server Error" });

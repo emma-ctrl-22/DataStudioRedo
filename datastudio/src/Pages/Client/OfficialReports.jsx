@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Skeleton, Modal } from '@mui/material';
+import axios from 'axios';
 import { OfficialReportModal } from './components';
-
-const fakeReports = [
-  { _id: '1', FacilityName: 'Facility 1', SerialNumber: 'SN001', EquipmentName: 'Equipment 1' },
-  { _id: '2', FacilityName: 'Facility 2', SerialNumber: 'SN002', EquipmentName: 'Equipment 2' },
-  { _id: '3', FacilityName: 'Facility 3', SerialNumber: 'SN003', EquipmentName: 'Equipment 3' },
-  { _id: '4', FacilityName: 'Facility 3', SerialNumber: 'SN004', EquipmentName: 'Equipment 4' },
-  { _id: '5', FacilityName: 'Facility 3', SerialNumber: 'SN005', EquipmentName: 'Equipment 5' },
-  { _id: '6', FacilityName: 'Facility 3', SerialNumber: 'SN006', EquipmentName: 'Equipment 6' },
-  { _id: '7', FacilityName: 'Facility 3', SerialNumber: 'SN007', EquipmentName: 'Equipment 7' },
-  { _id: '8', FacilityName: 'Facility 3', SerialNumber: 'SN008', EquipmentName: 'Equipment 8' },
-  { _id: '9', FacilityName: 'Facility 3', SerialNumber: 'SN009', EquipmentName: 'Equipment 9' },
-];
 
 const OfficialReports = () => {
   const [loading, setLoading] = useState(true);
-  const [reports, setReports] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [createdreports, setCreatedReports] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null);
 
+  const name = "nico nyatepe";
+
   useEffect(() => {
-    setTimeout(() => {
-      setReports(fakeReports);
-      setLoading(false);
-    }, 2000);
-  }, []);
+    const fetchReports = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8080/api/client/getofficialreports?name=${encodeURIComponent(name)}`);
+        console.log('API Response:', response.data); // Log API response
+        if (response.data.status === "ok") {
+          setCreatedReports(response.data.data); // Update state with data array
+        } else {
+          console.error('API returned error status:', response.data);
+        }
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching official reports:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchReports();
+  }, [name]);
 
   const openModal = (report) => {
     setSelectedReport(report);
@@ -35,27 +38,12 @@ const OfficialReports = () => {
     setSelectedReport(null);
   };
 
-  const filteredReports = reports.filter(
-    (report) =>
-      report.EquipmentName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      report.SerialNumber.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
   return (
     <div className="relative p-5">
       <div className="mt-3 mb-3 rounded-md">
         <h1 className="text-md text-left text-red-500 ">
           <span className="bg-red-100 p-1 rounded-md">Official Reports</span>
         </h1>
-      </div>
-      <div className="w-1/3 h-10 mb-6">
-        <input
-          type="text"
-          placeholder="Search by equipment name or serial number"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-full border border-gray-300 outline-none pl-2 font-inter text-xl rounded-md"
-        />
       </div>
       {loading ? (
         <div className="mt-4">
@@ -76,7 +64,7 @@ const OfficialReports = () => {
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {filteredReports.map((report) => (
+              {createdreports.map((report) => (
                 <tr className="border-b" key={report._id}>
                   <td className="px-6 py-1 border-r">{report._id}</td>
                   <td className="px-6 py-1 border-r">{report.FacilityName}</td>
@@ -104,7 +92,7 @@ const OfficialReports = () => {
         </Modal>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default OfficialReports
+export default OfficialReports;
