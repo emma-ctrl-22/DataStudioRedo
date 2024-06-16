@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const UserForm = () => {
   const [name, setName] = useState('');
@@ -7,21 +9,43 @@ const UserForm = () => {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = { name, email, phone, role };
-    console.log('User Data:', userData);
+    const userData = { name, email, phone, password, role };
+
+    const promise = axios.post('http://localhost:8080/api/auth/register', userData)
+      .then(response => {
+        console.log('Registration Successful:', response.data);
+        clearForm();
+        return response.data; // Pass data to the success callback
+      })
+      .catch(error => {
+        console.error('Registration Failed:', error.message);
+        throw new Error('Registration failed. Please try again.'); // Throw error for error callback
+      });
+
+    toast.promise(promise, {
+      loading: 'Registering user...',
+      success: (data) => {
+        return 'User registered successfully!';
+      },
+      error: (err) => {
+        return err.message || 'Failed to register user.';
+      }
+    });
   };
 
-  const handleClear = () => {
+  const clearForm = () => {
     setName('');
     setEmail('');
     setPhone('');
+    setPassword('');
     setRole('');
   };
 
   return (
     <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-4 p-4 border-2 mt-4 border-gray-600 rounded-md">
+      <Toaster /> {/* Toaster component from react-hot-toast for displaying toasts */}
       <div className="col-span-1">
         <label className="block text-gray-700">Name</label>
         <input
@@ -85,7 +109,7 @@ const UserForm = () => {
         </button>
         <button
           type="button"
-          onClick={handleClear}
+          onClick={clearForm}
           className="py-2 px-4 mt-6 ml-2 border rounded-md bg-red-500 text-white"
         >
           Clear

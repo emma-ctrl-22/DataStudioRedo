@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Skeleton } from '@mui/material';
-import {ReportModal} from './components';
-
-const fakeReports = [
-  { _id: '1', Engineer: 'John Doe', FacilityName: 'Facility 1', SerialNumber: 'SN001', type: 'PM Report', EquipmentName: 'Equipment 1' },
-  { _id: '2', Engineer: 'Jane Smith', FacilityName: 'Facility 2', SerialNumber: 'SN002', type: 'CM Report', EquipmentName: 'Equipment 2' },
-  { _id: '3', Engineer: 'Mike Brown', FacilityName: 'Facility 3', SerialNumber: 'SN003', type: 'PPM Report', EquipmentName: 'Equipment 3' },
-  { _id: '4', Engineer: 'Mike Brown', FacilityName: 'Facility 3', SerialNumber: 'SN003', type: 'CM Report', EquipmentName: 'Equipment 3' },
-  { _id: '5', Engineer: 'Mike Brown', FacilityName: 'Facility 3', SerialNumber: 'SN003', type: 'PM Report', EquipmentName: 'Equipment 3' },
-];
+import { ReportModal } from './components';
 
 const AllReports = () => {
   const [loading, setLoading] = useState(true);
@@ -16,12 +9,19 @@ const AllReports = () => {
   const [selectedReport, setSelectedReport] = useState(null);
 
   useEffect(() => {
-    // Simulate fetching data from an API
-    setTimeout(() => {
-      setReports(fakeReports);
-      setLoading(false);
-    }, 2000); // Simulating a 2-second delay
+    fetchReports();
   }, []);
+
+  const fetchReports = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/admin/get-all-reports');
+      setReports(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching reports:', error);
+      setLoading(false); // Set loading to false even on error to stop the skeleton loaders
+    }
+  };
 
   const openModal = (report) => {
     setSelectedReport(report);
@@ -34,7 +34,7 @@ const AllReports = () => {
   return (
     <div className="p-6">
       <div className="m-3 rounded-md">
-        <h1 className="text-md text-left text-red-500 ">
+        <h1 className="text-md text-left text-red-500">
           <span className="bg-red-100 p-1 rounded-md">All Reports</span>
         </h1>
       </div>

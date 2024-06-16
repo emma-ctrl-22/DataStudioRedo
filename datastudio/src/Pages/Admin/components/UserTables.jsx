@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
-
-const fakeUsers = [
-  { username: 'JohnDoe', email: 'johndoe@example.com', phone: '123-456-7890', role: 'Admin' },
-  { username: 'JaneSmith', email: 'janesmith@example.com', phone: '987-654-3210', role: 'User' },
-  { username: 'MikeBrown', email: 'mikebrown@example.com', phone: '555-555-5555', role: 'Manager' },
-];
+import axios from 'axios';
 
 const UserTables = () => {
   const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setUsers(fakeUsers);
-      setLoading(false);
-    }, 2000); // Simulating a network request
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/admin/get-users');
+        setUsers(response.data); // Assuming the API response returns an array of users
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
   }, []);
 
   return (
@@ -40,7 +43,7 @@ const UserTables = () => {
             </thead>
             <tbody>
               {users.map((user, index) => (
-                <tr key={index} className="even:bg-gray-50">
+                <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
                   <td className="py-2 px-4 border-b border-gray-300">{user.username}</td>
                   <td className="py-2 px-4 border-b border-gray-300">{user.email}</td>
                   <td className="py-2 px-4 border-b border-gray-300">{user.phone}</td>

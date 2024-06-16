@@ -8,6 +8,7 @@ const adminRouter = require('./routes/admin');
 const engineerRouter = require('./routes/engineer');
 const authRouter = require('./routes/auth');
 const connectDB = require('./db');
+const port = process.env.PORT || 8080;
 
 // Connect to the database
 connectDB();
@@ -35,6 +36,6 @@ router.use('/auth', authRouter);
 
 app.use('/api', router);
 
-app.listen(8080, () => {
-    console.log('Server is running on port 8080');
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });

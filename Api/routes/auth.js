@@ -65,7 +65,21 @@ router.post('/login', async (req, res) => {
 
         const token = jwt.sign({ id: user._id, email: user.email, role: user.role }, JWT_SECRET, { expiresIn: '1h' });
 
-        res.status(200).json({ message: 'Login successful', token });
+        // Return user info along with the token
+        const userInfo = {
+            id: user._id,
+            email: user.email,
+            role: user.role,
+            username: user.username // Assuming you have a username field in your User model
+            // Add other fields as needed
+        };
+
+        res.status(200).json({ message: 'Login successful', token, 
+        role: user.role,
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        phone: user.phone, });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });

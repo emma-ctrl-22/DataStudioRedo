@@ -1,62 +1,66 @@
-import React, { useState, useEffect } from "react";
-import Skeleton from "@mui/material/Skeleton";
-import Box from "@mui/material/Box";
-import toast, { Toaster } from "react-hot-toast";
-
-const fakeRequests = [
-  { _id: "1", title: "Request 1", type: "CM Report", author: "Author 1" },
-  { _id: "2", title: "Request 2", type: "PM Report", author: "Author 2" },
-  { _id: "3", title: "Request 3", type: "PPM Report", author: "Author 3" },
-  { _id: "4", title: "Request 4", type: "CM Report", author: "Author 4" },
-  { _id: "5", title: "Request 5", type: "PM Report", author: "Author 5" },
-  { _id: "6", title: "Request 6", type: "PPM Report", author: "Author 6" },
-];
-
-const fakeEngineers = [
-  { _id: "1", username: "Engineer 1" },
-  { _id: "2", username: "Engineer 2" },
-  { _id: "3", username: "Engineer 3" },
-];
+import React, { useState, useEffect } from 'react';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
+import axios from 'axios';
+import toast, { Toaster } from 'react-hot-toast';
 
 const AllRequests = () => {
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState([]);
   const [engineers, setEngineers] = useState([]);
+  const [selectedEngineer, setSelectedEngineer] = useState('');
+  const [selectedRequestId, setSelectedRequestId] = useState('');
 
   useEffect(() => {
-    // Simulate fetching data from an API
-    setTimeout(() => {
-      setRequests(fakeRequests);
-      setEngineers(fakeEngineers);
-      setLoading(false);
-    }, 2000); // Simulating a 2-second delay
+    const fetchRequestsAndEngineers = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/admin/requests-and-engineers');
+        const { requests, engineers } = response.data;
+        setRequests(requests);
+        setEngineers(engineers);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        toast.error('Error fetching data');
+      }
+    };
+
+    fetchRequestsAndEngineers();
   }, []);
 
-  const assignRequest = async (engineerUsername, requestId) => {
+  const assignRequest = async () => {
     try {
-      // Simulate an API call with a delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(
-        `Assigning request ${requestId} to engineer ${engineerUsername}`
-      );
+      const response = await axios.put(`http://localhost:8080/api/admin/assign-request/${selectedRequestId}`, {
+        engineerUsername: selectedEngineer,
+      });
+
       toast.promise(
         async () => {
-          await assignRequest(engineerUsername, requestId);
+          // Update the request locally
+          const updatedRequests = requests.map((request) =>
+            request._id === selectedRequestId ? { ...request, AssignTo: selectedEngineer } : request
+          );
+          setRequests(updatedRequests);
+
           return 'Request assigned successfully';
         },
         {
           loading: 'Assigning request...',
-          success: (msg) => msg,
-          error: 'Error assigning request',
+          success: (msg) => {
+            console.log(msg);
+            return msg;
+          },
+          error: (err) => {
+            console.error('Error assigning request:', err);
+            return 'Error assigning request';
+          },
         }
       );
-      setUpdateCount((prevCount) => prevCount + 1);
     } catch (error) {
-      console.error('Error assigning request', error);
+      console.error('Error assigning request:', error);
       toast.error('Error assigning request');
     }
   };
-  
 
   return (
     <div className="px-6">
@@ -75,65 +79,55 @@ const AllRequests = () => {
         <table className="w-full bg-white border border-gray-300 rounded-lg mt-8 ">
           <thead className="bg-gray-100">
             <tr>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">
-                Title
-              </th>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">
-                Type
-              </th>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">
-                Author
-              </th>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">
-                Assign To
-              </th>
+              <th className="py-2 px-4 border-b border-gray-300 text-left">Title</th>
+              <th className="py-2 px-4 border-b border-gray-300 text-left">Type</th>
+              <th className="py-2 px-4 border-b border-gray-300 text-left">Author</th>
+              <th className="py-2 px-4 border-b border-gray-300 text-left">Assign To</th>
             </tr>
           </thead>
           <tbody>
             {requests.map((request) => (
               <tr key={request._id} className="even:bg-gray-50">
+                <td className="py-2 px-4 border-b border-gray-300">{request.title}</td>
+                <td className="py-2 px-4 border-b border-gray-300">{request.type}</td>
+                <td className="py-2 px-4 border-b border-gray-300">{request.author}</td>
                 <td className="py-2 px-4 border-b border-gray-300">
-                  {request.title}
-                </td>
-                <td className="py-2 px-4 border-b border-gray-300">
-                  {request.type}
-                </td>
-                <td className="py-2 px-4 border-b border-gray-300">
-                  {request.author}
-                </td>
-                <td className="py-2 px-4 border-b border-gray-300">
-                  <select
-                    name="engineer"
-                    style={{ height: "2rem" }}
-                    id={`engineer-${request._id}`}
-                    className="engineer-dropdown"
-                  >
-                    <option value="">Select an engineer</option>
-                    {engineers.map((engineer) => (
-                      <option key={engineer._id} value={engineer.username}>
-                        {engineer.username}
-                      </option>
-                    ))}
-                  </select>
-                  <button
-                    className="bg-red-400 rounded-md px-2 py-1 text-white ml-2"
-                    onClick={() =>
-                      assignRequest(
-                        document.getElementById(`engineer-${request._id}`)
-                          .value,
-                        request._id
-                      )
-                    }
-                  >
-                    Assign
-                  </button>
+                  {request.AssignTo === 'anyone' ? (
+                    <>
+                      <select
+                        name={`engineer-${request._id}`}
+                        style={{ height: '2rem' }}
+                        className="engineer-dropdown"
+                        value={selectedEngineer}
+                        onChange={(e) => setSelectedEngineer(e.target.value)}
+                      >
+                        <option value="">Select an engineer</option>
+                        {engineers.map((engineer) => (
+                          <option key={engineer._id} value={engineer.username}>
+                            {engineer.username}
+                          </option>
+                        ))}
+                      </select>
+                      <button
+                        className="bg-red-400 rounded-md px-2 py-1 text-white ml-2"
+                        onClick={() => {
+                          setSelectedRequestId(request._id);
+                          assignRequest();
+                        }}
+                      >
+                        Assign
+                      </button>
+                    </>
+                  ) : (
+                    <span>{request.AssignTo}</span>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-      <Toaster/>
+      <Toaster />
     </div>
   );
 };
