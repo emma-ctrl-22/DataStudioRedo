@@ -13,7 +13,7 @@ const fakeRequests = [
 
 const ConfirmedRequests = () => {
   const loading = false; // Simulating loading state (false for simplicity)
-
+  const author = ""
   // Simulated function for sending a request (for demonstration purposes)
   const sendRequest = () => {
     toast.success('Request successfully sent!');
