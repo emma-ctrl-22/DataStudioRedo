@@ -3,12 +3,12 @@ import { Chart } from 'primereact/chart';
 
 const DoughnutChart = ({ values, title, onClick }) => {
   const data = {
-    labels: ['PM Report', 'CM Report', 'PPM Report'], // Example labels
+    labels: ['PM Report', 'CM Report', 'PPM Report',"regular"], // Example labels
     datasets: [
       {
         data: values || [],
-        backgroundColor: ['#42A5F5', '#66BB6A', '#EF5350'], // Example background colors
-        hoverBackgroundColor: ['#64B5F6', '#81C784', '#E57373'], // Example hover colors
+        backgroundColor: ['#42A5F5', '#66BB6A', '#EF5350',"#c0c0c0"], // Example background colors
+        hoverBackgroundColor: ['#64B5F6', '#81C784', '#E57373','#c0c0c0'], // Example hover colors
       },
     ],
   };
