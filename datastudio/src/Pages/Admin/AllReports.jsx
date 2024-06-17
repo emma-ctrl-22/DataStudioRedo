@@ -32,7 +32,7 @@ const AllReports = () => {
   };
 
   return (
-    <div className="p-6">
+    <div style={{fontFamily:"Montserrat"}} className="p-6">
       <div className="m-3 rounded-md">
         <h1 className="text-md text-left text-red-500">
           <span className="bg-red-100 p-1 rounded-md">All Reports</span>

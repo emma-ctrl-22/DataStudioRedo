@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState ,useContext} from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { AuthContext } from "../../../Context/AuthContext";
 
 const ReportCreationModal = ({
   isOpen,
@@ -21,6 +22,9 @@ const ReportCreationModal = ({
 
   if (!isOpen) return null;
 
+  const { userInfo } = useContext(AuthContext);
+  const Engineer = userInfo.username;
+
   const validateForm = () => {
     if (!facilityName || !equipmentName || !serialNumber || !modelNumber || !problemDesc || !workDone || reportType === "") {
       toast.error("Please fill in all required fields.");
@@ -34,7 +38,7 @@ const ReportCreationModal = ({
     if (!validateForm()) {
       return;
     }
- const Engineer = "Emmanuel Nyatepe"; // Replace with the actual engineer name
+//  const Engineer = "Emmanuel Nyatepe"; // Replace with the actual engineer name
     const reportDetails = {
       Engineer: Engineer,
       facilityName: facilityName,
@@ -73,7 +77,7 @@ const ReportCreationModal = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 w-full">
+    <div style={{fontFamily:"Montserrat"}} className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 w-full">
       <div className="bg-white p-8 rounded-lg shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">Create Report</h2>
         <form onSubmit={makeReport} className="space-y-4">

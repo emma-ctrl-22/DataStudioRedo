@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Skeleton } from '@mui/material';
 import axios from 'axios';
 import { toast, Toaster } from 'react-hot-toast';
+import { AuthContext } from '../../../Context/AuthContext';
 
 const ConfirmedRequests = () => {
+  const { userInfo } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState([]);
-  const author = "nico@gmail.com";
+  const author = userInfo.email;
 
   useEffect(() => {
     const fetchRequests = async () => {

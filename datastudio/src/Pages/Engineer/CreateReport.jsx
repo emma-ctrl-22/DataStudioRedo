@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import axios from "axios";
 import { Skeleton, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Modal, Box, Button } from "@mui/material";
 import { ReportCreationModal } from "./components";
+import { AuthContext } from "../../Context/AuthContext";
 
 const CreateReport = () => {
+  const { userInfo } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [assignedRequests, setAssignedRequests] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const username = userInfo.username;
 
   useEffect(() => {
     fetchAssignedRequests();
@@ -17,7 +20,7 @@ const CreateReport = () => {
     try {
       const response = await axios.get("http://localhost:8080/api/engineer/requests", {
         params: {
-          name: "Emmanuel Nyatepe" // Replace with dynamic name if needed
+          name: username// Replace with dynamic name if needed
         }
       });
       setAssignedRequests(response.data);
@@ -33,7 +36,7 @@ const CreateReport = () => {
   };
 
   return (
-    <div className="py-4 px-8">
+    <div style={{fontFamily:"Montserrat"}} className="py-4 px-8">
       <div className="mt-3 mb-3 rounded-md">
         <h1 className="text-md text-left text-red-500 ">
           <span className="bg-red-100 p-1 rounded-md">Create Report</span>

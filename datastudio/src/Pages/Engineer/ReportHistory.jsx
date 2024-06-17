@@ -42,7 +42,7 @@ const ReportHistory = () => {
   const reversedReports = [...filteredReports].reverse();
 
   return (
-    <div className="relative p-5">
+    <div style={{fontFamily:"Montserrat"}} className="relative p-5">
       <div className="mt-3 mb-3 rounded-md">
         <h1 className="text-md text-left text-red-500 ">
           <span className="bg-red-100 p-1 rounded-md">Report History</span>

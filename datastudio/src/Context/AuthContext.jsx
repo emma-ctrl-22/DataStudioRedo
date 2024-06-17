@@ -1,7 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "axios";
-export const AuthContext = createContext();
 import toast,{Toaster} from "react-hot-toast";
+export const AuthContext = createContext();
+
 
 export const AuthProvider = ({ children }) => {
   const [isLoading, setLoading] = useState(true);
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }) => {
             const { email, role, token, username, id } = res.data;
             const UserInfo = { email, role, username, id, };
             console.log('The userInfo:', UserInfo);
+            toast.success("Login successful");
             setUserInfo(UserInfo);
             setUserToken(token);
             localStorage.setItem("userInfo", JSON.stringify(UserInfo));

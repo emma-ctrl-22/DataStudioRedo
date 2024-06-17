@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import axios from 'axios'; // Import Axios
+import axios from 'axios';
+import { AuthContext } from '../../Context/AuthContext';
 
 const CreateRequest = () => {
+  const { userInfo } = useContext(AuthContext); // Accessing userInfo from AuthContext
   const [title, setTitle] = useState('');
   const [type, setType] = useState('');
   const [description, setDescription] = useState('');
-  const author="nico@gmail.com"
+
+  const author = userInfo.email || 'nico@gmail.com'; // Assigning email from userInfo to author
 
   const sendRequest = async (e) => {
     e.preventDefault();
@@ -45,15 +48,15 @@ const CreateRequest = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
+    <div style={{ fontFamily: 'Montserrat' }} className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white">
       <div className="the-bottom text-center">
         <h2 style={{ fontFamily: 'Montserrat', color: 'white' }}>New Request</h2>
         <p style={{ fontFamily: 'Montserrat', color: 'white', opacity: '0.5', fontSize: '0.9rem' }}>
           Send a new request now
         </p>
-        <form onSubmit={sendRequest} style={{width:"30vw"}}>
+        <form onSubmit={sendRequest} style={{ width: "30vw" }}>
           <label className="mt-4">
-            <span className="text-sm text-left" style={{ fontFamily: 'Montserrat', color: 'white',alignSelf:"start" }}>
+            <span className="text-sm text-left" style={{ fontFamily: 'Montserrat', color: 'white', alignSelf: "start" }}>
               Request Title
             </span>
             <input
@@ -103,7 +106,7 @@ const CreateRequest = () => {
           </button>
         </form>
       </div>
-      <Toaster/>
+      <Toaster />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import chartIcon from "../../assets/chart.svg";
+import { Toaster } from "react-hot-toast";
 
 const Dashboard = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -61,7 +62,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-full h-full mx-0 px-4 py-0 bg-gray-100 overflow-y-auto custom-scrollbar">
+    <div style={{fontFamily:"Montserrat"}} className="w-full h-full mx-0 px-4 py-0 bg-gray-100 overflow-y-auto custom-scrollbar">
       <div className="mt-5 mx-3 rounded-md">
         <h1 className="text-md text-left text-red-500 ">
           <span className="bg-red-100 p-1 rounded-md">Dashboard</span>
@@ -110,6 +111,7 @@ const Dashboard = () => {
           {selectedChart === 'DoughnutChart' && <DoughnutChart title="Sample Doughnut" values={[100, 200, 300]} />}
         </Box>
       </Modal>
+      <Toaster />
     </div>
   );
 };

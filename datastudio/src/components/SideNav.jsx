@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import {
@@ -9,12 +9,12 @@ import {
   PersonAdd,
   ReportOffSharp,
   DescriptionSharp,
+  ExitToAppSharp,
 } from "@mui/icons-material";
+import { AuthContext } from "../Context/AuthContext"; // Adjust the path as necessary
 
 const SideNav = () => {
-  const [userInfo, setUserInfo] = useState({
-    role: "admin", // Change role here to 'client' to simulate client role
-  });
+  const { userInfo, logout } = useContext(AuthContext); // Fetching userInfo and logout function from AuthContext
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
 
@@ -23,19 +23,27 @@ const SideNav = () => {
   };
 
   return (
-    <div className={`flex flex-col h-screen p-1 bg-gray-100 text-black border-r-2 border-gray-300 border-dotted ${isCollapsed ? "w-20" : "w-60"} transition-width duration-300`}>
+    <div
+      className={`flex flex-col h-screen p-1 bg-gray-100 text-black border-r-2 border-gray-300 border-dotted ${
+        isCollapsed ? "w-20" : "w-60"
+      } transition-width duration-300`}
+      style={{fontFamily:"Montserrat"}}
+    >
       <div className="space-y-0">
         {!isCollapsed && (
           <>
             <UserProfile toggleSidebar={toggleSidebar} />
-            <h2 style={{ marginTop: "1.8rem" }} className="text-xs font-semibold text-gray-800 text-left ml-4 mt-4 opacity-50 mx-2">
+            <h2
+              style={{ marginTop: "1.8rem" }}
+              className="text-xs font-semibold text-gray-800 text-left ml-4 mt-4 opacity-50 mx-2"
+            >
               NAVIGATION
             </h2>
           </>
         )}
         <div className="flex-1 mx-1">
           <ul className="pt-2 pb-4 space-y-1 text-sm">
-            {userInfo.role === "admin" && (
+            {userInfo?.role === "admin" && (
               <>
                 <li className="rounded-sm">
                   <NavLink
@@ -48,7 +56,10 @@ const SideNav = () => {
                   >
                     <HomeSharp
                       style={{
-                        color: location.pathname === "/admin/dashboard" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/admin/dashboard"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -66,7 +77,10 @@ const SideNav = () => {
                   >
                     <PersonAdd
                       style={{
-                        color: location.pathname === "/admin/add-user" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/admin/add-user"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -84,7 +98,10 @@ const SideNav = () => {
                   >
                     <ArticleSharp
                       style={{
-                        color: location.pathname === "/admin/reports" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/admin/reports"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -102,7 +119,10 @@ const SideNav = () => {
                   >
                     <ReportOffSharp
                       style={{
-                        color: location.pathname === "/admin/requests" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/admin/requests"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -112,7 +132,7 @@ const SideNav = () => {
               </>
             )}
 
-            {userInfo.role === "engineer" && (
+            {userInfo?.role === "engineer" && (
               <>
                 <li className="rounded-sm">
                   <NavLink
@@ -125,7 +145,10 @@ const SideNav = () => {
                   >
                     <CreateNewFolderSharp
                       style={{
-                        color: location.pathname === "/engineer/create-report" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/engineer/create-report"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -143,7 +166,10 @@ const SideNav = () => {
                   >
                     <WorkHistorySharp
                       style={{
-                        color: location.pathname === "/engineer/report-history" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/engineer/report-history"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -153,7 +179,7 @@ const SideNav = () => {
               </>
             )}
 
-            {userInfo.role === "client" && (
+            {userInfo?.role === "client" && (
               <>
                 <li className="rounded-sm">
                   <NavLink
@@ -166,7 +192,10 @@ const SideNav = () => {
                   >
                     <CreateNewFolderSharp
                       style={{
-                        color: location.pathname === "/client/create-request" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/client/create-request"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -184,7 +213,10 @@ const SideNav = () => {
                   >
                     <WorkHistorySharp
                       style={{
-                        color: location.pathname === "/client/requests" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/client/requests"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -202,7 +234,10 @@ const SideNav = () => {
                   >
                     <DescriptionSharp
                       style={{
-                        color: location.pathname === "/client/official-reports" ? "#930006" : "#5B6B79",
+                        color:
+                          location.pathname === "/client/official-reports"
+                            ? "#930006"
+                            : "#5B6B79",
                       }}
                       className="w-4 h-4"
                     />
@@ -213,6 +248,20 @@ const SideNav = () => {
             )}
           </ul>
         </div>
+      </div>
+      <div className="mt-auto mx-1 mb-2">
+        <button
+          onClick={logout}
+          className="flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2 w-full"
+        >
+          <ExitToAppSharp
+            style={{
+              color: "#5B6B79",
+            }}
+            className="w-4 h-4"
+          />
+          {!isCollapsed && <span>Logout</span>}
+        </button>
       </div>
     </div>
   );

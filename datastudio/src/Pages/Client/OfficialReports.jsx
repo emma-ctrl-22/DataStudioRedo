@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useContext } from 'react';
 import { Skeleton, Modal } from '@mui/material';
 import axios from 'axios';
 import { OfficialReportModal } from './components';
+import { AuthContext } from '../../Context/AuthContext';
 
 const OfficialReports = () => {
+  const { userInfo } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [createdreports, setCreatedReports] = useState([]);
   const [selectedReport, setSelectedReport] = useState(null);
 
-  const name = "nico nyatepe";
+  const name = userInfo.username 
+  console.log(name)
 
   useEffect(() => {
     const fetchReports = async () => {

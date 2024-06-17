@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LogoImage from "../../assets/LogoImage.svg";
 import toast, { Toaster } from "react-hot-toast";
@@ -14,32 +14,50 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
   const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const { Login } = useContext(AuthContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(email, password);
+
     if (email === "") {
-      toast("Please enter your email!", {
-        icon: "👏",
-      });
-    } else if (password === "") {
-      toast("Please enter your password!", {
-        icon: "🤦‍♂️",
-      });
-    } else {
-      try {
-       login(email, password);
-      } catch (error) {
-  
+      toast.error("Please enter your email!");
+      return;
+    }
+
+    if (password === "") {
+      toast.error("Please enter your password!");
+      return;
+    }
+
+    try {
+      const status = await Login(email, password);
+
+      if (status === 200) {
+        // Redirect based on role
+        const storedUserInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if (storedUserInfo) {
+          if (storedUserInfo.role === "admin") {
+            navigate("/admin/dashboard");
+          } else if (storedUserInfo.role === "engineer") {
+            navigate("/engineer/report-history");
+          } else if (storedUserInfo.role === "client") {
+            navigate("/client/create-request");
+          }
+        }
+      } else {
+        toast.error("Login failed. Please check your credentials.");
       }
+    } catch (error) {
+      toast.error("An error occurred during login.");
     }
   };
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-blue-400 bg-center p-4 sm:p-0 "
+      className="flex items-center justify-center min-h-screen bg-cover bg-blue-400 bg-center p-4 sm:p-0"
+      style={{ backgroundImage: `url(${bgImage})` }}
     >
       <form
         onSubmit={handleSubmit}
