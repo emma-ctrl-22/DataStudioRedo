@@ -3,7 +3,7 @@ import axios from 'axios';
 import toast, { Toaster } from 'react-hot-toast';
 
 const UserForm = () => {
-  const [name, setName] = useState('');
+  const [username, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
@@ -11,7 +11,7 @@ const UserForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const userData = { name, email, phone, password, role };
+    const userData = { username, email, phone, password, role };
 
     const promise = axios.post('http://localhost:8080/api/auth/register', userData)
       .then(response => {
@@ -51,7 +51,7 @@ const UserForm = () => {
         <input
           type="text"
           className="w-full mt-1 p-2 border border-gray-300 rounded-md"
-          value={name}
+          value={username}
           onChange={(e) => setName(e.target.value)}
           required
         />

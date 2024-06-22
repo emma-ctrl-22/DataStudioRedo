@@ -246,6 +246,27 @@ const SideNav = () => {
                 </li>
               </>
             )}
+            <li className="rounded-sm">
+                  <NavLink
+                    to="/chat"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                    }
+                  >
+                    <WorkHistorySharp
+                      style={{
+                        color:
+                          location.pathname === "/engineer/report-history"
+                            ? "#930006"
+                            : "#5B6B79",
+                      }}
+                      className="w-4 h-4"
+                    />
+                    {!isCollapsed && <span>Chat</span>}
+                  </NavLink>
+                </li>
           </ul>
         </div>
       </div>

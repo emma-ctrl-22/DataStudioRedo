@@ -13,9 +13,9 @@ router.get('/', (req, res) => {
 
 // Register a new user
 router.post('/register', async (req, res) => {
-    const { name, email, phone, role, password } = req.body;
+    const { username, email, phone, role, password } = req.body;
 
-    if (!name || !email || !phone || !role || !password) {
+    if (!username || !email || !phone || !role || !password) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = new User({
-            name,
+            username,
             email,
             phone,
             role,

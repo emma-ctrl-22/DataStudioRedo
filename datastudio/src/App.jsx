@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Login from "./Pages/Authentication/Login";
 import { Dashboard, AddUser, AllReports, AllRequests } from "./Pages/Admin";
 import { CreateReport, ReportHistory } from "./Pages/Engineer";
+import Chat from "./Pages/Chat";
 import { DefaultLayout } from "./components";
 import { CreateRequest, Requests, OfficialReports } from "./Pages/Client";
 import { AuthContext } from "./Context/AuthContext";
@@ -61,6 +62,14 @@ function App() {
                   </DefaultLayout>
                 }
               />
+              <Route
+                path="/chat"
+                element={
+                  <DefaultLayout>
+                    <Chat />
+                  </DefaultLayout>
+                }
+              />
               <Route path="/" element={<Navigate replace to="/client/create-request" />} />
               <Route path="*" element={<Navigate replace to="/client/create-request" />} />
             </>
@@ -79,6 +88,14 @@ function App() {
                 element={
                   <DefaultLayout>
                     <ReportHistory />
+                  </DefaultLayout>
+                }
+              />
+              <Route
+                path="/chat"
+                element={
+                  <DefaultLayout>
+                    <Chat />
                   </DefaultLayout>
                 }
               />
@@ -116,6 +133,14 @@ function App() {
                 element={
                   <DefaultLayout>
                     <AllRequests />
+                  </DefaultLayout>
+                }
+              />
+              <Route
+                path="/chat"
+                element={
+                  <DefaultLayout>
+                    <Chat />
                   </DefaultLayout>
                 }
               />
