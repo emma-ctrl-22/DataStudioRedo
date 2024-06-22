@@ -39,7 +39,7 @@ const SideNav = () => {
       <div
           style={{ marginTop: "0%" }}
           onClick={toggleSidebar}
-          className="flex items-center justify-center p-0 cursor-pointer m-4"
+          className="flex items-center justify-center p-0 cursor-pointer m-2"
         >
           <img src={datastudio} alt="Logo" className="w-14 h-14" />
         </div>

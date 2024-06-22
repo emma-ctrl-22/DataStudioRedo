@@ -65,11 +65,11 @@ const Chat = () => {
             <div className="flex flex-col w-3/4 p-4 h-full">
                 {selectedUser ? (
                     <>
-                        <h2 className="text-xl font-bold mb-4">Chat with {selectedUser.username}</h2>
+                        <h2 className="text-xl font-bold mb-4">{selectedUser.username}</h2>
                         <div className="flex flex-col overflow-y-auto h-5/6 mb-4 border border-gray-700 rounded-lg p-4 bg-gray-800">
                             {messages.length > 0 ? messages.map((msg, index) => (
-                                <div key={index} className={`px-5 py-1 mb-2 rounded-lg ${msg.sender === userId ? 'self-end bg-blue-600 text-white' : 'self-start bg-blue-500 text-black'}`}>
-                                    <p>{msg.message}</p>
+                                <div key={index} className={`px-5  mb-2  rounded-t-md  ${msg.sender === userId ? 'self-end bg-blue-600 text-white rounded-bl-md' : 'self-start bg-white text-black rounded-br-md'}`}>
+                                    <p className='mb-0'>{msg.message}</p>
                                     <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
                                 </div>
                             )) : (

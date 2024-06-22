@@ -50,7 +50,7 @@ const UserList = ({ onSelectUser }) => {
                         onClick={() => handleUserClick(user)} 
                         className={`cursor-pointer mb-2 p-2 rounded-lg hover:bg-blue-700 ${selectedUserId === user._id ? 'bg-blue-600' : 'bg-gray-900'}`}
                     >
-                        {user.username}
+                        {user.username} - {user.role}
                     </li>
                 ))}
             </ul>
