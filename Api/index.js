@@ -11,6 +11,7 @@ const engineerRouter = require('./routes/engineer');
 const authRouter = require('./routes/auth');
 const connectDB = require('./db');
 const chatRouter = require('./routes/chat');
+const Chat = require('./models/Chat');  
 const port = 8080;
 
 // Connect to the database

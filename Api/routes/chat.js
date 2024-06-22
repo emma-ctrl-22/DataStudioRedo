@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Chat = require('../models/Chat');
+const User = require('../models/User'); // Assuming you have a User model defined
 
 // Get chat history between two users
 router.get('/history/:userId1/:userId2', async (req, res) => {
@@ -25,7 +26,10 @@ router.get('/history/:userId1/:userId2', async (req, res) => {
 router.post('/send', async (req, res) => {
     const { senderId, receiverId, message } = req.body;
 
+    console.log("Request body:", req.body); // Log the request body
+
     if (!senderId || !receiverId || !message) {
+        console.error("Validation error: All fields are required");
         return res.status(400).json({ error: "All fields are required" });
     }
 
@@ -33,7 +37,11 @@ router.post('/send', async (req, res) => {
         const sender = await User.findById(senderId);
         const receiver = await User.findById(receiverId);
 
+        console.log("Sender found:", sender);
+        console.log("Receiver found:", receiver);
+
         if (!sender || !receiver) {
+            console.error("Validation error: Sender or receiver not found");
             return res.status(404).json({ error: "Sender or receiver not found" });
         }
 

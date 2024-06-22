@@ -56,19 +56,19 @@ const Login = () => {
 
   return (
     <div
-      className="flex items-center justify-center min-h-screen bg-cover bg-blue-400 bg-center p-4 sm:p-0"
-      style={{ backgroundImage: `url(${bgImage})` }}
+      className="flex items-center justify-center min-h-screen  p-4 sm:p-0"
+      style={{backgroundColor:"#131920"}}
     >
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-4 bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg border border-gray-300 rounded-lg p-6 sm:p-8 w-full max-w-md mx-auto shadow-lg"
+        className="flex flex-col gap-4 bg-white bg-opacity-10 backdrop-filter backdrop-blur-md border border-gray-300 rounded-lg p-6 sm:p-8 w-full max-w-md mx-auto shadow-lg"
       >
         <img
           src={LogoImage}
           alt="Logo"
           className="w-full max-w-xs mx-auto mb-4"
         />
-        <h1 className="text-center text-black-700 text-xl font-semibold mb-4">
+        <h1 className="text-center text-white text-xl font-semibold mb-4">
           Sign in to your account
         </h1>
         <div className="flex flex-col mb-2">
@@ -105,7 +105,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="flex justify-center mt-8 bg-gradient-to-r from-purple-700 to-purple-900 p-3 rounded-md text-white font-semibold hover:from-purple-500 hover:to-purple-700 transition duration-200 ease-in-out"
+            className="flex justify-center mt-8 bg-blue-600 p-3 rounded-md text-white font-semibold hover:from-purple-500 hover:to-purple-700 transition duration-200 ease-in-out"
           >
             Sign in
           </button>

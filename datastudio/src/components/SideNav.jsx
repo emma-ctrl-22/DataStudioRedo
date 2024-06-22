@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import UserProfile from "./UserProfile";
+import datastudio from "../assets/datastudio2.png";
 import {
   CreateNewFolderSharp,
   WorkHistorySharp,
@@ -24,18 +25,30 @@ const SideNav = () => {
 
   return (
     <div
-      className={`flex flex-col h-screen p-1 bg-gray-100 text-black border-r-2 border-gray-300 border-dotted ${
+      className={`flex flex-col h-screen p-1 text-white border-r-2 border-white border-dotted ${
         isCollapsed ? "w-20" : "w-60"
       } transition-width duration-300`}
-      style={{fontFamily:"Montserrat"}}
+      style={{
+        fontFamily: "Montserrat",
+        backgroundColor: "#1b232d",
+        position: "sticky",
+        top: 0,
+      }}
     >
       <div className="space-y-0">
+      <div
+          style={{ marginTop: "0%" }}
+          onClick={toggleSidebar}
+          className="flex items-center justify-center p-0 cursor-pointer m-4"
+        >
+          <img src={datastudio} alt="Logo" className="w-14 h-14" />
+        </div>
         {!isCollapsed && (
           <>
             <UserProfile toggleSidebar={toggleSidebar} />
             <h2
               style={{ marginTop: "1.8rem" }}
-              className="text-xs font-semibold text-gray-800 text-left ml-4 mt-4 opacity-50 mx-2"
+              className="text-xs font-semibold text-white text-left ml-4 mt-4  mx-2"
             >
               NAVIGATION
             </h2>
@@ -50,15 +63,15 @@ const SideNav = () => {
                     to="/admin/dashboard"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2  text-blue-600"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <HomeSharp
                       style={{
                         color:
                           location.pathname === "/admin/dashboard"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -71,15 +84,15 @@ const SideNav = () => {
                     to="/admin/add-user"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2  text-blue-600"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <PersonAdd
                       style={{
                         color:
                           location.pathname === "/admin/add-user"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -92,15 +105,15 @@ const SideNav = () => {
                     to="/admin/reports"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <ArticleSharp
                       style={{
                         color:
                           location.pathname === "/admin/reports"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -113,15 +126,15 @@ const SideNav = () => {
                     to="/admin/requests"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <ReportOffSharp
                       style={{
                         color:
                           location.pathname === "/admin/requests"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -139,15 +152,15 @@ const SideNav = () => {
                     to="/engineer/create-report"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <CreateNewFolderSharp
                       style={{
                         color:
                           location.pathname === "/engineer/create-report"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -160,15 +173,15 @@ const SideNav = () => {
                     to="/engineer/report-history"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <WorkHistorySharp
                       style={{
                         color:
                           location.pathname === "/engineer/report-history"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -186,15 +199,15 @@ const SideNav = () => {
                     to="/client/create-request"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <CreateNewFolderSharp
                       style={{
                         color:
                           location.pathname === "/client/create-request"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -207,15 +220,15 @@ const SideNav = () => {
                     to="/client/requests"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <WorkHistorySharp
                       style={{
                         color:
                           location.pathname === "/client/requests"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -228,15 +241,15 @@ const SideNav = () => {
                     to="/client/official-reports"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <DescriptionSharp
                       style={{
                         color:
                           location.pathname === "/client/official-reports"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -251,15 +264,15 @@ const SideNav = () => {
                     to="/chat"
                     className={({ isActive }) =>
                       isActive
-                        ? "flex items-center p-2 space-x-3 rounded-md bg-red-100 mx-2 text-red-700"
-                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2"
+                        ? "flex items-center p-2 space-x-3 rounded-md bg-[#2a4887] mx-2 text-blue-700"
+                        : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
                     <WorkHistorySharp
                       style={{
                         color:
                           location.pathname === "/engineer/report-history"
-                            ? "#930006"
+                            ? "#4680ff"
                             : "#5B6B79",
                       }}
                       className="w-4 h-4"
@@ -273,7 +286,7 @@ const SideNav = () => {
       <div className="mt-auto mx-1 mb-2">
         <button
           onClick={logout}
-          className="flex items-center p-2 space-x-3 rounded-md hover:bg-red-100 mx-2 w-full"
+          className="flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2 w-full"
         >
           <ExitToAppSharp
             style={{

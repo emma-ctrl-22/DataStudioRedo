@@ -31,9 +31,13 @@ const Chat = () => {
 
     useEffect(() => {
         socket.on('receiveMessage', (message) => {
-            if (message.sender === selectedUser?._id || message.receiver === selectedUser?._id) {
-                setMessages((prevMessages) => [...prevMessages, message]);
-            }
+            // Check if the message is not already in the state to avoid duplication
+            setMessages((prevMessages) => {
+                if (prevMessages.some(msg => msg._id === message._id)) {
+                    return prevMessages;
+                }
+                return [...prevMessages, message];
+            });
         });
 
         return () => {
@@ -57,15 +61,14 @@ const Chat = () => {
     };
 
     return (
-        <div className="flex flex-row h-screen">
-            <UserList onSelectUser={setSelectedUser} />
-            <div className="flex flex-col w-3/4 p-4">
+        <div className="flex flex-row h-screen bg-gray-900 text-white">
+            <div className="flex flex-col w-3/4 p-4 h-full">
                 {selectedUser ? (
                     <>
                         <h2 className="text-xl font-bold mb-4">Chat with {selectedUser.username}</h2>
-                        <div className="flex flex-col-reverse overflow-y-auto h-5/6 mb-4 border rounded-lg p-4">
+                        <div className="flex flex-col overflow-y-auto h-5/6 mb-4 border border-gray-700 rounded-lg p-4 bg-gray-800">
                             {messages.length > 0 ? messages.map((msg, index) => (
-                                <div key={index} className={msg.sender === userId ? 'self-end bg-blue-500 text-white p-2 rounded-lg mb-2' : 'self-start bg-gray-200 p-2 rounded-lg mb-2'}>
+                                <div key={index} className={`px-5 py-1 mb-2 rounded-lg ${msg.sender === userId ? 'self-end bg-blue-600 text-white' : 'self-start bg-blue-500 text-black'}`}>
                                     <p>{msg.message}</p>
                                     <small>{new Date(msg.timestamp).toLocaleTimeString()}</small>
                                 </div>
@@ -79,15 +82,16 @@ const Chat = () => {
                                 value={newMessage}
                                 onChange={(e) => setNewMessage(e.target.value)}
                                 placeholder="Type a message..."
-                                className="flex-grow p-2 border rounded-l-lg"
+                                className="flex-grow p-2 border border-gray-700 rounded-l-lg bg-gray-800 text-white"
                             />
-                            <button onClick={sendMessage} className="bg-blue-500 text-white p-2 rounded-r-lg">Send</button>
+                            <button onClick={sendMessage} className="bg-blue-600 text-white p-2 rounded-r-lg">Send</button>
                         </div>
                     </>
                 ) : (
                     <p className="text-xl">Select a user to start chatting</p>
                 )}
             </div>
+            <UserList onSelectUser={setSelectedUser} />
         </div>
     );
 };

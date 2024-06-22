@@ -9,8 +9,8 @@ const UserProfile = ({ toggleSidebar }) => {
   const role = userInfo?.role || 'User'; // Default to 'User' if role is not available
 
   return (
-    <div className="flex items-center space-x-2 rounded-md p-3 bg-gray-200 mx-2 my-4">
-      <div className="w-12 h-12 bg-red-700 rounded-full">
+    <div className="flex items-center space-x-2 rounded-md p-3 bg-blue-200  mx-2 my-4 border-2 border-gray-600" >
+      <div className="w-12 h-12 bg-blue-700 rounded-full">
         <img
           className="w-full h-full"
           src={User} // Replace with the path to your profile image
