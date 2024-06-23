@@ -48,7 +48,7 @@ const Chat = () => {
     return () => {
       socket.off("receiveMessage", handleMessageReceive);
     };
-  }, [selectedUser]);  
+  }, [selectedUser]);
 
   const sendMessage = async () => {
     if (newMessage.trim() && selectedUser) {
@@ -63,8 +63,8 @@ const Chat = () => {
           "http://localhost:8080/api/chat/send",
           messageData
         );
+        socket.emit("sendMessage", response.data); // Emit only once
         setMessages((prevMessages) => [...prevMessages, response.data]);
-        socket.emit("sendMessage", response.data);
         setNewMessage("");
       } catch (error) {
         console.error("Error sending message:", error);

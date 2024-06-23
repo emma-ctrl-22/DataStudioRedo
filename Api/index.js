@@ -53,8 +53,15 @@ const io = new Server(server, {
     },
 });
 
+let onlineUsers = {};
+
 io.on('connection', (socket) => {
     console.log('New client connected:', socket.id);
+
+    socket.on('userConnected', (userId) => {
+        onlineUsers[userId] = socket.id;
+        io.emit('updateUserStatus', { userId, status: 'online' });
+    });
 
     socket.on('sendMessage', async ({ sender, receiver, message }) => {
         const chatMessage = new Chat({ sender, receiver, message });
@@ -64,6 +71,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
+        const userId = Object.keys(onlineUsers).find(key => onlineUsers[key] === socket.id);
+        if (userId) {
+            delete onlineUsers[userId];
+            io.emit('updateUserStatus', { userId, status: 'offline' });
+        }
         console.log('Client disconnected:', socket.id);
     });
 });
