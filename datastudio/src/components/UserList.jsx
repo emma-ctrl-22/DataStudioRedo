@@ -74,7 +74,7 @@ const UserList = ({ onSelectUser }) => {
                         <span className={`mr-2 ${user.status === 'online' ? 'text-green-500' : 'text-red-500'}`}>
                             ●
                         </span>
-                        {user.username}
+                        {user.username} - <small>{user.role}</small>
                     </div>
                 ))
             ) : (
