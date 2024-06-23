@@ -1,5 +1,4 @@
-// src/components/Chat.js
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useCallback } from "react";
 import socketIOClient from "socket.io-client";
 import axios from "axios";
 import UserList from "../components/UserList";
@@ -14,38 +13,42 @@ const Chat = () => {
   const { userInfo } = useContext(AuthContext);
   const userId = userInfo?.id;
 
-  useEffect(() => {
+  const fetchMessages = useCallback(async () => {
     if (selectedUser) {
-      const fetchMessages = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:8080/api/chat/history/${userId}/${selectedUser._id}`
-          );
-          setMessages(response.data);
-        } catch (error) {
-          console.error("Error fetching chat history:", error);
-        }
-      };
-
-      fetchMessages();
+      try {
+        const response = await axios.get(
+          `http://localhost:8080/api/chat/history/${userId}/${selectedUser._id}`
+        );
+        setMessages(response.data);
+      } catch (error) {
+        console.error("Error fetching chat history:", error);
+      }
     }
   }, [userId, selectedUser]);
 
   useEffect(() => {
-    socket.on("receiveMessage", (message) => {
-      // Check if the message is not already in the state to avoid duplication
-      setMessages((prevMessages) => {
-        if (prevMessages.some((msg) => msg._id === message._id)) {
-          return prevMessages;
-        }
-        return [...prevMessages, message];
-      });
-    });
+    fetchMessages();
+  }, [fetchMessages]);
 
-    return () => {
-      socket.off("receiveMessage");
+  useEffect(() => {
+    const handleMessageReceive = (message) => {
+      console.log("Received message:", message);
+      if (message.senderId === selectedUser._id || message.receiverId === selectedUser._id) {
+        setMessages((prevMessages) => {
+          if (prevMessages.some((msg) => msg._id === message._id)) {
+            return prevMessages;
+          }
+          return [...prevMessages, message];
+        });
+      }
     };
-  }, [selectedUser]);
+  
+    socket.on("receiveMessage", handleMessageReceive);
+  
+    return () => {
+      socket.off("receiveMessage", handleMessageReceive);
+    };
+  }, [selectedUser]);  
 
   const sendMessage = async () => {
     if (newMessage.trim() && selectedUser) {

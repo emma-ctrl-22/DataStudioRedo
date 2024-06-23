@@ -52,6 +52,7 @@ router.post('/send', async (req, res) => {
         });
 
         await chatMessage.save();
+        console.log("Saved message:", chatMessage);
 
         res.status(201).json(chatMessage);
     } catch (err) {
