@@ -58,8 +58,8 @@ const AllRequests = () => {
   };
 
   return (
-    <div style={{fontFamily:"Montserrat"}} className="px-6">
-      <div className="mt-3 mx-1 rounded-md">
+    <div style={{fontFamily:"Montserrat"}} className="px-6 bg-gray-900 pt-4">
+      <div className=" mx-1 rounded-md">
         <h1 className="text-md text-left text-blue-500 mb-3">
           <span className="bg-blue-100 p-1 rounded-md">All Requests</span>
         </h1>

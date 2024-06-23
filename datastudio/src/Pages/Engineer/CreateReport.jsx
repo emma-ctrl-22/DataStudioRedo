@@ -36,7 +36,7 @@ const CreateReport = () => {
   };
 
   return (
-    <div style={{fontFamily:"Montserrat"}} className="py-4 px-8 bg-gray-900">
+    <div style={{fontFamily:"Montserrat"}} className="py-4 px-8 bg-gray-900 text-white">
       <div className="mt-3 mb-3 rounded-md">
         <h1 className="text-md text-left text-blue-500 ">
           <span className="bg-blue-100 p-1 rounded-md">Create Report</span>
@@ -49,18 +49,18 @@ const CreateReport = () => {
           <Table className="bg-gray-900 border text-white">
             <TableHead>
               <TableRow>
-                <TableCell className="text-white">ID</TableCell>
-                <TableCell className="text-white">Type</TableCell>
-                <TableCell>Author</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell style={{ color: 'white' }}>ID</TableCell>
+                <TableCell style={{ color: 'white' }}>Type</TableCell>
+                <TableCell style={{ color: 'white' }}>Author</TableCell>
+                <TableCell style={{ color: 'white' }}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {assignedRequests.map((request) => (
                 <TableRow key={request._id}>
-                  <TableCell>{request._id}</TableCell>
-                  <TableCell>{request.type}</TableCell>
-                  <TableCell>{request.author}</TableCell>
+                  <TableCell style={{ color: 'white' }} >{request._id}</TableCell>
+                  <TableCell style={{ color: 'white' }}>{request.type}</TableCell>
+                  <TableCell style={{ color: 'white' }}>{request.author}</TableCell>
                   <TableCell>
                     <Button
                       variant="contained"

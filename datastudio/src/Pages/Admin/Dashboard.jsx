@@ -41,7 +41,7 @@ const Dashboard = () => {
         const annualReportsResponse = await axios.get('http://localhost:8080/api/admin/annual-reports');
         setAnnualReportData(annualReportsResponse.data);
 
-        const annualRequestsResponse = await axios.get('http://localhost:8080/api/admin/annual-reports');
+        const annualRequestsResponse = await axios.get('http://localhost:8080/api/admin/annual-requests');
         setAnnualRequestData(annualRequestsResponse.data);
       } catch (error) {
         console.error('Error fetching data:', error);

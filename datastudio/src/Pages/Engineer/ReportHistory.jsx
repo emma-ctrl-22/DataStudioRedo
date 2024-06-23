@@ -67,7 +67,7 @@ const ReportHistory = () => {
         <div className="mt-10">
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
-              <tr className="w-full bg-gray-200 text-gray-600 text-left text-sm uppercase font-semibold tracking-wider">
+              <tr className="w-full bg-blue-500  text-white text-left text-sm uppercase font-semibold tracking-wider">
                 <th className="px-6 py-3 border-b">Report ID</th>
                 <th className="px-6 py-3 border-b">Facility Name</th>
                 <th className="px-6 py-3 border-b">Serial Number</th>
@@ -75,7 +75,7 @@ const ReportHistory = () => {
                 <th className="px-6 py-3 border-b">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-gray-600 text-sm font-light">
+            <tbody className="text-white text-sm font-light bg-blue-300">
               {reversedReports.map((report) => (
                 <tr className="border-b" key={report._id}>
                   <td className="px-6 py-1 border-r">{report._id}</td>
