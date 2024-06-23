@@ -42,10 +42,10 @@ const OfficialReports = () => {
   };
 
   return (
-    <div className="relative p-5">
+    <div className="relative p-5 bg-gray-900">
       <div className="mt-3 mb-3 rounded-md">
-        <h1 className="text-md text-left text-red-500 ">
-          <span className="bg-red-100 p-1 rounded-md">Official Reports</span>
+        <h1 className="text-md text-left text-blue-500 ">
+          <span className="bg-blue-100 p-1 rounded-md">Official Reports</span>
         </h1>
       </div>
       {loading ? (
@@ -58,7 +58,7 @@ const OfficialReports = () => {
         <div className="mt-10">
           <table className="min-w-full bg-white border border-gray-300">
             <thead>
-              <tr className="w-full bg-gray-200 text-gray-600 text-left text-sm uppercase font-semibold tracking-wider">
+              <tr className="w-full bg-blue-500 text-gray-600 text-left text-sm uppercase font-semibold tracking-wider">
                 <th className="px-6 py-3 border-b">Report ID</th>
                 <th className="px-6 py-3 border-b">Facility Name</th>
                 <th className="px-6 py-3 border-b">Serial Number</th>
@@ -66,7 +66,7 @@ const OfficialReports = () => {
                 <th className="px-6 py-3 border-b">Actions</th>
               </tr>
             </thead>
-            <tbody className="text-gray-600 text-sm font-light">
+            <tbody className="text-gray-600 text-sm font-light bg-blue-200">
               {createdreports.map((report) => (
                 <tr className="border-b" key={report._id}>
                   <td className="px-6 py-1 border-r">{report._id}</td>

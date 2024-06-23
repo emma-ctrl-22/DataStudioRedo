@@ -38,15 +38,15 @@ const PendingRequests = () => {
   }, [author]);
 
   return (
-    <div className="bg-gray-200 text-white h-screen px-6  flex flex-col items-center ">
+    <div className="bg-gray-900 text-white h-screen px-6  flex flex-col items-center ">
         <table className="w-full mt-4 bg-white border border-gray-400">
           <thead>
-            <tr className="bg-gray-200">
-              <th className="py-2 text-black  border-b border-gray-300">Request ID</th>
-              <th className="py-2 mr-4 text-black border-b border-gray-300">Request Title</th>
-              <th className="py-2 px-4 border-b text-black border-gray-300">Request Type</th>
-              <th className="py-2 px-4 border-b text-black border-gray-300">Request Status</th>
-              <th className="py-2 px-4 border-b text-black border-gray-300">Assigned To</th>
+            <tr className="bg-blue-500">
+              <th className="py-2 text-white border-b border-gray-300">Request ID</th>
+              <th className="py-2 mr-4 text-white border-b border-gray-300">Request Title</th>
+              <th className="py-2 px-4 border-b text-white border-gray-300">Request Type</th>
+              <th className="py-2 px-4 border-b text-white border-gray-300">Request Status</th>
+              <th className="py-2 px-4 border-b text-white border-gray-300">Assigned To</th>
             </tr>
           </thead>
           <tbody>
@@ -60,12 +60,12 @@ const PendingRequests = () => {
           ) : (
             // Render actual data from filtered requests array
             requests.map((request) => (
-              <tr key={request._id} className="border-b border-gray-300">
-                <td className="py-2 px-4 text-black">{request._id}</td>
-                <td className="py-2 px-4 text-black">{request.title}</td>
-                <td className="py-2 px-4 text-black">{request.type}</td>
-                <td className="py-2 px-4 text-black">{request.status}</td>
-                <td className="py-2 px-4 text-black">{request.AssignTo}</td>
+              <tr key={request._id} className="border-b bg-blue-200 border-gray-300">
+                <td className="py-2 px-4 text-white">{request._id}</td>
+                <td className="py-2 px-4 text-white">{request.title}</td>
+                <td className="py-2 px-4 text-white">{request.type}</td>
+                <td className="py-2 px-4 text-white">{request.status}</td>
+                <td className="py-2 px-4 text-white">{request.AssignTo}</td>
               </tr>
             ))
           )}
