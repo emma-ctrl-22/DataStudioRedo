@@ -11,6 +11,7 @@ import {
   ReportOffSharp,
   DescriptionSharp,
   ExitToAppSharp,
+  ChatBubble
 } from "@mui/icons-material";
 import { AuthContext } from "../Context/AuthContext"; // Adjust the path as necessary
 
@@ -268,10 +269,10 @@ const SideNav = () => {
                         : "flex items-center p-2 space-x-3 rounded-md hover:bg-[#2a4887] mx-2"
                     }
                   >
-                    <WorkHistorySharp
+                    <ChatBubble
                       style={{
                         color:
-                          location.pathname === "/engineer/report-history"
+                          location.pathname === "/chat"
                             ? "#4680ff"
                             : "#5B6B79",
                       }}
