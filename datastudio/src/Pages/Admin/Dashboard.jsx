@@ -62,10 +62,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div style={{fontFamily:"Montserrat"}} className="w-full h-full mx-0 px-4 py-0 bg-gray-100 overflow-y-auto custom-scrollbar">
+    <div style={{fontFamily:"Montserrat"}} className="w-full h-full mx-0 px-4 py-0 bg-gray-900 overflow-y-auto custom-scrollbar">
       <div className="mt-5 mx-3 rounded-md">
-        <h1 className="text-md text-left text-red-500 ">
-          <span className="bg-red-100 p-1 rounded-md">Dashboard</span>
+        <h1 className="text-md text-left text-blue-500 ">
+          <span className="bg-blue-100 p-1 rounded-md">Dashboard</span>
         </h1>
       </div>
       <div className="grid grid-cols-3 gap-4 mt-4 mb-4">
@@ -75,14 +75,14 @@ const Dashboard = () => {
         <Card title="Completed Requests" data={data.completedRequests} icon={chartIcon} iconBgColor="bg-green-100" onClick={() => handleChartClick('Card4')} />
         <Card title="Uncompleted Requests" data={data.uncompletedRequests} icon={chartIcon} iconBgColor="bg-green-100" onClick={() => handleChartClick('Card5')} />
       </div>
-      <div onClick={() => handleChartClick('StackedChart')} className="bg-white rounded-md border border-gray-500 w-full h-80 mb-4">
+      <div onClick={() => handleChartClick('StackedChart')} className="bg-blue-300 rounded-md border border-gray-500 w-full h-80 mb-4">
         <StackedChart />
       </div>
-      <div className="bg-white rounded-md border py-4 border-gray-500 w-full h-80 mb-4 flex flex-row justify-around">
+      <div className="bg-blue-300 rounded-md border py-4 border-gray-500 w-full h-80 mb-4 flex flex-row justify-around">
         <DoughnutChart 
           title="Annual Reports" 
           values={[annualReportData.PMReport, annualReportData.PPMReport, annualReportData.CMReport, annualReportData.regular]} 
-          onClick={() => handleChartClick('DoughnutChart')} 
+          onClick={() => handleChartClick('DoughnutChart1')} 
         />
         <DoughnutChart 
           title="Annual Requests" 
@@ -108,7 +108,16 @@ const Dashboard = () => {
           {selectedChart === 'Card4' && <Card title="Completed Requests" data={data.completedRequests} icon={chartIcon} iconBgColor="bg-green-100" />}
           {selectedChart === 'Card5' && <Card title="UnCompleted Requests" data={data.uncompletedRequests} icon={chartIcon} iconBgColor="bg-green-100" />}
           {selectedChart === 'StackedChart' && <StackedChart />}
-          {selectedChart === 'DoughnutChart' && <DoughnutChart title="Sample Doughnut" values={[100, 200, 300]} />}
+          {selectedChart === 'DoughnutChart1' && <DoughnutChart 
+          title="Annual Reports" 
+          values={[annualReportData.PMReport, annualReportData.PPMReport, annualReportData.CMReport, annualReportData.regular]} 
+          onClick={() => handleChartClick('DoughnutChart1')} 
+        />}
+        {selectedChart === 'DoughnutChart' && <DoughnutChart 
+          title="Annual Requests" 
+          values={[annualRequestData.PMReport, annualRequestData.PPMReport, annualRequestData.CMReport, annualRequestData.regular]} 
+          onClick={() => handleChartClick('DoughnutChart')} 
+        />}
         </Box>
       </Modal>
       <Toaster />

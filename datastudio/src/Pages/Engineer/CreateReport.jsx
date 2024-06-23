@@ -36,21 +36,21 @@ const CreateReport = () => {
   };
 
   return (
-    <div style={{fontFamily:"Montserrat"}} className="py-4 px-8">
+    <div style={{fontFamily:"Montserrat"}} className="py-4 px-8 bg-gray-900">
       <div className="mt-3 mb-3 rounded-md">
-        <h1 className="text-md text-left text-red-500 ">
-          <span className="bg-red-100 p-1 rounded-md">Create Report</span>
+        <h1 className="text-md text-left text-blue-500 ">
+          <span className="bg-blue-100 p-1 rounded-md">Create Report</span>
         </h1>
       </div>
       {loading ? (
         <Skeleton variant="rectangular" width="100%" height={400} />
       ) : (
         <TableContainer component={Paper}>
-          <Table>
+          <Table className="bg-gray-900 border text-white">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
-                <TableCell>Type</TableCell>
+                <TableCell className="text-white">ID</TableCell>
+                <TableCell className="text-white">Type</TableCell>
                 <TableCell>Author</TableCell>
                 <TableCell>Actions</TableCell>
               </TableRow>

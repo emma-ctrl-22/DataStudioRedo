@@ -47,39 +47,39 @@ const UserForm = () => {
     <form onSubmit={handleSubmit} className="grid grid-cols-3 gap-4 p-4 border-2 mt-4 border-gray-600 rounded-md">
       <Toaster /> {/* Toaster component from react-hot-toast for displaying toasts */}
       <div className="col-span-1">
-        <label className="block text-gray-700">Name</label>
+        <label className="block text-blue-300">Name</label>
         <input
           type="text"
-          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-[#1d2432]"
           value={username}
           onChange={(e) => setName(e.target.value)}
           required
         />
       </div>
       <div className="col-span-1">
-        <label className="block text-gray-700">Email</label>
+        <label className="block text-blue-300">Email</label>
         <input
           type="email"
-          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-[#1d2432]"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
       </div>
       <div className="col-span-1">
-        <label className="block text-gray-700">Phone</label>
+        <label className="block text-blue-300">Phone</label>
         <input
           type="tel"
-          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-[#1d2432]"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           required
         />
       </div>
       <div className="col-span-1">
-        <label className="block text-gray-700">Role</label>
+        <label className="block text-blue-300">Role</label>
         <select
-          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-[#1d2432]"
           value={role}
           onChange={(e) => setRole(e.target.value)}
           required
@@ -91,10 +91,10 @@ const UserForm = () => {
         </select>
       </div>
       <div className="col-span-1">
-        <label className="block text-gray-700">Password</label>
+        <label className="block text-blue-300">Password</label>
         <input
           type='password'
-          className="w-full mt-1 p-2 border border-gray-300 rounded-md"
+          className="w-full mt-1 p-2 border border-gray-300 rounded-md bg-[#1d2432]"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -103,14 +103,14 @@ const UserForm = () => {
       <div className="col-span-3 flex justify-end">
         <button
           type="submit"
-          className="py-2 px-4 mt-6 border rounded-md bg-red-500 text-white"
+          className="py-2 px-4 mt-6 border rounded-md bg-blue-500 text-white"
         >
           Submit
         </button>
         <button
           type="button"
           onClick={clearForm}
-          className="py-2 px-4 mt-6 ml-2 border rounded-md bg-red-500 text-white"
+          className="py-2 px-4 mt-6 ml-2 border rounded-md bg-blue-500 text-white"
         >
           Clear
         </button>

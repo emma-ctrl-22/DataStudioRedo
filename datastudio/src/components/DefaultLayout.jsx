@@ -20,7 +20,7 @@ const MobileDropdownMenu = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="bg-white text-black border-r-2 border-gray-300 border-dotted">
+        <div className="bg-gray-900 text-black border-r-2 border-gray-300 border-dotted">
           <ul className="pt-2 pb-4 space-y-1 text-sm">
             <li>
               <NavLink
@@ -82,7 +82,7 @@ const DefaultLayout = ({ children }) => {
   const isMobile = window.innerWidth <= 768; // Adjust the breakpoint as needed
 
   return (
-    <div className="flex w-full h-full bg-gray-100">
+    <div className="flex w-full h-full bg-gray-900">
       {isMobile ? <MobileDropdownMenu /> : <SideNav />}
       <main className=" flex-1 h-full  overflow-y-auto bg-gray-100 custom-scrollbar">
         {children}

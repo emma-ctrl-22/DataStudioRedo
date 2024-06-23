@@ -2,7 +2,7 @@ import React from 'react'
 import { InfoSharp } from '@mui/icons-material';
 const Card = ({ title, data ,onClick ,iconBgColor,icon}) => {
   return (
-    <div onClick={onClick} className="p-4 rounded-lg border bg-white border-gray-300 mb-4 w-full max-w-sm">
+    <div onClick={onClick} className="p-4 rounded-lg border bg-blue-300 border-gray-300 mb-4 w-full max-w-sm">
             <div className="flex items-center justify-between">
                 <div className={`flex items-center justify-center rounded-md p-3 ${iconBgColor}`}>
                     <img src={icon} alt={title} className="w-4 h-4" />

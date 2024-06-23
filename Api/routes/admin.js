@@ -35,14 +35,14 @@ router.get("/requests-and-engineers", async (req, res) => {
   }
 });
 
-router.put("/assign-request/:requestId", async (req, res) => {
-  const { engineerUsername } = req.body;
-  const { requestId } = req.params;
-
+router.post("/assign-request", async (req, res) => {
+  const { engineerUsername,requestId } = req.body;
+ console.log("requestId", requestId);
+ console.log("engineerUsername", engineerUsername);
   try {
     const updatedRequest = await Request.findByIdAndUpdate(
       requestId,
-      { assignedTo: engineerUsername },
+      { AssignTo: engineerUsername },
       { new: true }
     );
 

@@ -32,10 +32,10 @@ const AllReports = () => {
   };
 
   return (
-    <div style={{fontFamily:"Montserrat"}} className="p-6">
+    <div style={{fontFamily:"Montserrat"}} className="p-6 bg-gray-900">
       <div className="m-3 rounded-md">
-        <h1 className="text-md text-left text-red-500">
-          <span className="bg-red-100 p-1 rounded-md">All Reports</span>
+        <h1 className="text-md text-left text-blue-500">
+          <span className="bg-blue-100 p-1 rounded-md">All Reports</span>
         </h1>
       </div>
       {loading ? (
@@ -51,24 +51,24 @@ const AllReports = () => {
           <table className="min-w-full bg-white border border-gray-300 rounded-lg">
             <thead className="bg-gray-100">
               <tr>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Engineer</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Facility Name</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Serial Number</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Type</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Equipment Name</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Actions</th>
+                <th className="py-2 px-4 border-b border-gray-300 bg-blue-400 text-left">Engineer</th>
+                <th className="py-2 px-4 border-b border-gray-300 bg-blue-400 text-left">Facility Name</th>
+                <th className="py-2 px-4 border-b border-gray-300 bg-blue-400 text-left">Serial Number</th>
+                <th className="py-2 px-4 border-b border-gray-300 bg-blue-400 text-left">Type</th>
+                <th className="py-2 px-4 border-b border-gray-300 bg-blue-400 text-left">Equipment Name</th>
+                <th className="py-2 px-4 border-b border-gray-300 bg-blue-400 text-left">Actions</th>
               </tr>
             </thead>
             <tbody>
               {reports.map((report) => (
-                <tr key={report._id} className="even:bg-gray-50">
-                  <td className="py-2 px-4 border-b border-gray-300">{report.Engineer}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">{report.FacilityName}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">{report.SerialNumber}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">{report.type}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">{report.EquipmentName}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">
-                    <button className="bg-red-500 p-1 rounded-md text-white text-sm" onClick={() => openModal(report)}>View Report</button>
+                <tr key={report._id} className="even:bg-blue-50">
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.Engineer}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.FacilityName}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.SerialNumber}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.type}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.EquipmentName}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">
+                    <button className="bg-blue-500 p-1 rounded-md text-white text-sm" onClick={() => openModal(report)}>View Report</button>
                   </td>
                 </tr>
               ))}

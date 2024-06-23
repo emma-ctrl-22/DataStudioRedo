@@ -42,10 +42,10 @@ const ReportHistory = () => {
   const reversedReports = [...filteredReports].reverse();
 
   return (
-    <div style={{fontFamily:"Montserrat"}} className="relative p-5">
+    <div style={{fontFamily:"Montserrat"}} className="relative p-5 bg-gray-900">
       <div className="mt-3 mb-3 rounded-md">
-        <h1 className="text-md text-left text-red-500 ">
-          <span className="bg-red-100 p-1 rounded-md">Report History</span>
+        <h1 className="text-md text-left text-blue-500 ">
+          <span className="bg-blue-100 p-1 rounded-md">Report History</span>
         </h1>
       </div>
       <div className="w-1/3 h-10 mb-6">
@@ -54,7 +54,7 @@ const ReportHistory = () => {
           placeholder="Search by equipment name or serial number"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-full border border-gray-300 outline-none pl-2 font-inter text-xl rounded-md"
+          className="w-full h-full border border-gray-300 outline-none pl-2 font-inter text-xl rounded-md bg-blue-100"
         />
       </div>
       {loading ? (

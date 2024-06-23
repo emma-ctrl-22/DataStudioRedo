@@ -8,54 +8,49 @@ const AllRequests = () => {
   const [loading, setLoading] = useState(true);
   const [requests, setRequests] = useState([]);
   const [engineers, setEngineers] = useState([]);
-  const [selectedEngineer, setSelectedEngineer] = useState('');
-  const [selectedRequestId, setSelectedRequestId] = useState('');
+  const [selectedAssignments, setSelectedAssignments] = useState({});
 
   useEffect(() => {
-    const fetchRequestsAndEngineers = async () => {
-      try {
-        const response = await axios.get('http://localhost:8080/api/admin/requests-and-engineers');
-        const { requests, engineers } = response.data;
-        setRequests(requests);
-        setEngineers(engineers);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        toast.error('Error fetching data');
-      }
-    };
 
     fetchRequestsAndEngineers();
   }, []);
-
-  const assignRequest = async () => {
+  const fetchRequestsAndEngineers = async () => {
     try {
-      const response = await axios.put(`http://localhost:8080/api/admin/assign-request/${selectedRequestId}`, {
-        engineerUsername: selectedEngineer,
+      const response = await axios.get('http://localhost:8080/api/admin/requests-and-engineers');
+      const { requests, engineers } = response.data;
+      setRequests(requests);
+      setEngineers(engineers);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      toast.error('Error fetching data');
+    }
+  };
+
+  const handleEngineerChange = (requestId, engineerUsername) => {
+    setSelectedAssignments((prev) => ({
+      ...prev,
+      [requestId]: engineerUsername,
+    }));
+  };
+
+  const assignRequest = async (requestId) => {
+    const engineerUsername = selectedAssignments[requestId];
+
+    if (!engineerUsername) {
+      toast.error('Please select an engineer');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://localhost:8080/api/admin/assign-request', {
+        engineerUsername,
+        requestId,
       });
+      console.log('Response:', response.data);
 
-      toast.promise(
-        async () => {
-          // Update the request locally
-          const updatedRequests = requests.map((request) =>
-            request._id === selectedRequestId ? { ...request, AssignTo: selectedEngineer } : request
-          );
-          setRequests(updatedRequests);
-
-          return 'Request assigned successfully';
-        },
-        {
-          loading: 'Assigning request...',
-          success: (msg) => {
-            console.log(msg);
-            return msg;
-          },
-          error: (err) => {
-            console.error('Error assigning request:', err);
-            return 'Error assigning request';
-          },
-        }
-      );
+      toast.success('Request assigned successfully');
+      fetchRequestsAndEngineers();
     } catch (error) {
       console.error('Error assigning request:', error);
       toast.error('Error assigning request');
@@ -64,9 +59,9 @@ const AllRequests = () => {
 
   return (
     <div style={{fontFamily:"Montserrat"}} className="px-6">
-      <div className="mt-3 mx-3 rounded-md">
-        <h1 className="text-md text-left text-red-500 mb-3 ">
-          <span className="bg-red-100 p-1 rounded-md">All Requests</span>
+      <div className="mt-3 mx-1 rounded-md">
+        <h1 className="text-md text-left text-blue-500 mb-3">
+          <span className="bg-blue-100 p-1 rounded-md">All Requests</span>
         </h1>
       </div>
       {loading ? (
@@ -76,18 +71,18 @@ const AllRequests = () => {
           <Skeleton variant="rectangular" width="100%" height={40} />
         </Box>
       ) : (
-        <table className="w-full bg-white border border-gray-300 rounded-lg mt-8 ">
+        <table className="w-full bg-blue-200 border border-gray-300 rounded-lg mt-8">
           <thead className="bg-gray-100">
             <tr>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">Title</th>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">Type</th>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">Author</th>
-              <th className="py-2 px-4 border-b border-gray-300 text-left">Assign To</th>
+              <th className="py-2 px-4 border-b bg-blue-300 border-gray-300 text-left">Title</th>
+              <th className="py-2 px-4 border-b bg-blue-300 border-gray-300 text-left">Type</th>
+              <th className="py-2 px-4 border-b bg-blue-300 border-gray-300 text-left">Author</th>
+              <th className="py-2 px-4 border-b bg-blue-300 border-gray-300 text-left">Assign To</th>
             </tr>
           </thead>
           <tbody>
             {requests.map((request) => (
-              <tr key={request._id} className="even:bg-gray-50">
+              <tr key={request._id} className="even:bg-blue-400">
                 <td className="py-2 px-4 border-b border-gray-300">{request.title}</td>
                 <td className="py-2 px-4 border-b border-gray-300">{request.type}</td>
                 <td className="py-2 px-4 border-b border-gray-300">{request.author}</td>
@@ -98,8 +93,8 @@ const AllRequests = () => {
                         name={`engineer-${request._id}`}
                         style={{ height: '2rem' }}
                         className="engineer-dropdown"
-                        value={selectedEngineer}
-                        onChange={(e) => setSelectedEngineer(e.target.value)}
+                        value={selectedAssignments[request._id] || ''}
+                        onChange={(e) => handleEngineerChange(request._id, e.target.value)}
                       >
                         <option value="">Select an engineer</option>
                         {engineers.map((engineer) => (
@@ -110,10 +105,7 @@ const AllRequests = () => {
                       </select>
                       <button
                         className="bg-red-400 rounded-md px-2 py-1 text-white ml-2"
-                        onClick={() => {
-                          setSelectedRequestId(request._id);
-                          assignRequest();
-                        }}
+                        onClick={() => assignRequest(request._id)}
                       >
                         Assign
                       </button>

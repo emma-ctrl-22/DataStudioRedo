@@ -42,7 +42,7 @@ const UserList = ({ onSelectUser }) => {
 
     return (
         <div className="w-1/4 p-4 border-r bg-gray-800 text-white overflow-hidden">
-            <h2 className="text-xl font-bold mb-4">Users</h2>
+            <h2 className="text-xl font-bold mb-4">Contacts </h2>
             <ul className="h-full overflow-y-auto">
                 {filteredUsers.map(user => (
                     <li 

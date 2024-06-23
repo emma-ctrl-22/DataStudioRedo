@@ -32,22 +32,22 @@ const UserTables = () => {
         </Box>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-500 rounded-lg">
+          <table className="min-w-full bg-blue-200 border border-gray-500 rounded-lg">
             <thead className="bg-gray-100">
               <tr>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Username</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Email</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Phone</th>
-                <th className="py-2 px-4 border-b border-gray-300 text-left">Role</th>
+                <th className="py-2 px-4 border-b border-gray-300 text-left bg-blue-400">Username</th>
+                <th className="py-2 px-4 border-b border-gray-300 text-left bg-blue-400">Email</th>
+                <th className="py-2 px-4 border-b border-gray-300 text-left bg-blue-400">Phone</th>
+                <th className="py-2 px-4 border-b border-gray-300 text-left bg-blue-400">Role</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user, index) => (
-                <tr key={index} className={index % 2 === 0 ? 'bg-gray-50' : ''}>
-                  <td className="py-2 px-4 border-b border-gray-300">{user.username}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">{user.email}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">{user.phone}</td>
-                  <td className="py-2 px-4 border-b border-gray-300">{user.role}</td>
+                <tr key={index} className={index % 2 === 0 ? 'bg-blue-100' : ''}>
+                  <td className="py-2 px-4 border-b text-white border-gray-300">{user.username}</td>
+                  <td className="py-2 px-4 border-b text-white border-gray-300">{user.email}</td>
+                  <td className="py-2 px-4 border-b text-white border-gray-300">{user.phone}</td>
+                  <td className="py-2 px-4 border-b text-white border-gray-300">{user.role}</td>
                 </tr>
               ))}
             </tbody>
