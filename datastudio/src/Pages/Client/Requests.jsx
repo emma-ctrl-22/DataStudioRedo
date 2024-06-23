@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate, Link, Routes, Route } from 'react-router-dom';
-import { Tabs, Tab} from '@mui/material';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ConfirmedRequests,PendingRequests } from './components';
+import { Tabs, Tab } from '@mui/material';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import { ConfirmedRequests, PendingRequests } from './components';
 
 const theme = createTheme({
   palette: {
@@ -11,6 +11,16 @@ const theme = createTheme({
     },
   },
 });
+
+const StyledTabs = styled(Tabs)({
+  background: '#3b82f6',
+});
+
+const StyledTab = styled(Tab)(({ theme }) => ({
+  '&.Mui-selected': {
+    color: '#111827',
+  },
+}));
 
 const tabsData = [
   { label: "Confirmed Requests", value: "confirmed-requests", component: ConfirmedRequests },
@@ -26,9 +36,9 @@ const Requests = () => {
   return (
     <ThemeProvider theme={theme}>
       <div>
-        <Tabs value={currentTab} aria-label="Requests tabs" style={{background:"#F3F5F7"}}>
+        <StyledTabs value={currentTab} aria-label="Requests tabs">
           {openTabs.map(tab => (
-            <Tab
+            <StyledTab
               key={tab.value}
               label={
                 <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -40,7 +50,7 @@ const Requests = () => {
               to={`/client/requests/${tab.value}`}
             />
           ))}
-        </Tabs>
+        </StyledTabs>
         <Routes>
           {openTabs.map(tab => (
             <Route key={tab.value} path={tab.value} element={<tab.component />} />
@@ -48,7 +58,7 @@ const Requests = () => {
         </Routes>
       </div>
     </ThemeProvider>
-  )
+  );
 }
 
-export default Requests
+export default Requests;
