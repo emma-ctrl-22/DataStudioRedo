@@ -270,7 +270,7 @@ router.get("/reports-by-date-pdf", async (req, res) => {
     doc.pipe(fs.createWriteStream(filePath));
 
     // Add some content to the PDF
-    doc.fontSize(16).text('Reports from the past 30 days', { align: 'center' },{underline: true});
+    doc.fontSize(16).text('Reports from the past 30 days', { align: 'center' });
     doc.moveDown();
 
     reports.forEach((report, index) => {
