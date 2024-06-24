@@ -8,6 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import chartIcon from "../../assets/chart.svg";
 import { Toaster } from "react-hot-toast";
+import Button from '@mui/material/Button'; // Import the Button component
 
 const Dashboard = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -59,6 +60,23 @@ const Dashboard = () => {
   const handleCloseModal = () => {
     setOpenModal(false);
     setSelectedChart(null);
+  };
+
+  const handleDownloadPDF = async () => {
+    const date = new Date().toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
+    try {
+      const response = await axios.get(`http://localhost:8080/api/admin/reports-by-date-pdf?date=${date}`, {
+        responseType: 'blob', // Important
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Reports.pdf'); // Specify the file name
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+    }
   };
 
   return (
@@ -120,6 +138,14 @@ const Dashboard = () => {
         />}
         </Box>
       </Modal>
+      <Button 
+        variant="contained" 
+        color="primary" 
+        onClick={handleDownloadPDF}
+        sx={{ position: 'absolute', bottom: 16, right: 16 }} // Positioning the button
+      >
+        Download PDF
+      </Button>
       <Toaster />
     </div>
   );

@@ -4,6 +4,14 @@ const User = require("../models/User");
 const Report = require("../models/Report");
 const Request = require("../models/Request");
 const mongoose = require('mongoose');
+const PDFDocument = require('pdfkit');
+const path = require('path');
+const fs = require('fs');
+
+const reportsDir = path.join(__dirname, '..', 'reports');
+if (!fs.existsSync(reportsDir)) {
+  fs.mkdirSync(reportsDir);
+}
 
 // GET all users
 router.get("/get-users", async (req, res) => {
@@ -258,18 +266,22 @@ router.get("/reports-by-date-pdf", async (req, res) => {
 
     // Create a PDF document
     const doc = new PDFDocument();
-    const filePath = path.join(__dirname, '..', 'reports', `Reports_${Date.now()}.pdf`);
+    const filePath = path.join(reportsDir, `Reports_${Date.now()}.pdf`);
     doc.pipe(fs.createWriteStream(filePath));
 
     // Add some content to the PDF
-    doc.fontSize(16).text('Reports from the past 30 days', { align: 'center' });
+    doc.fontSize(16).text('Reports from the past 30 days', { align: 'center' },{underline: true});
     doc.moveDown();
 
     reports.forEach((report, index) => {
       doc.fontSize(12).text(`Report ${index + 1}`, { underline: true });
       doc.text(`Type: ${report.type}`);
       doc.text(`Created At: ${report.createdAt}`);
-      doc.text(`Details: ${report.details}`);
+      doc.text(`Engineer: ${report.Engineer}`);
+      doc.text(`Facility Name: ${report.FacilityName}`);
+      doc.text(`Serial Number: ${report.SerialNumber}`);
+      doc.text(`Problem Description: ${report.ProblemDesc}`);
+      doc.text(`Further Works: ${report.FurtherWorkDesc}`);
       doc.moveDown();
     });
 
