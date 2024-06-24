@@ -237,4 +237,63 @@ router.get("/annual-requests", async (req, res) => {
   }
 });
 
+router.get("/reports-by-date-pdf", async (req, res) => {
+  const { date } = req.query;
+  if (!date) {
+    return res.status(400).json({ error: "Date query parameter is required" });
+  }
+
+  try {
+    const parsedDate = new Date(date);
+    const startDate = new Date(parsedDate);
+    startDate.setDate(startDate.getDate() - 30);
+
+    const reports = await Report.find({
+      createdAt: { $gte: startDate, $lt: parsedDate }
+    });
+
+    if (reports.length === 0) {
+      return res.status(404).json({ message: "No reports found for the given date range" });
+    }
+
+    // Create a PDF document
+    const doc = new PDFDocument();
+    const filePath = path.join(__dirname, '..', 'reports', `Reports_${Date.now()}.pdf`);
+    doc.pipe(fs.createWriteStream(filePath));
+
+    // Add some content to the PDF
+    doc.fontSize(16).text('Reports from the past 30 days', { align: 'center' });
+    doc.moveDown();
+
+    reports.forEach((report, index) => {
+      doc.fontSize(12).text(`Report ${index + 1}`, { underline: true });
+      doc.text(`Type: ${report.type}`);
+      doc.text(`Created At: ${report.createdAt}`);
+      doc.text(`Details: ${report.details}`);
+      doc.moveDown();
+    });
+
+    doc.end();
+
+    doc.on('finish', () => {
+      res.download(filePath, (err) => {
+        if (err) {
+          console.error("Error downloading file:", err);
+          res.status(500).json({ error: "Internal Server Error" });
+        } else {
+          // Optionally delete the file after sending it to the client
+          fs.unlink(filePath, (err) => {
+            if (err) {
+              console.error("Error deleting file:", err);
+            }
+          });
+        }
+      });
+    });
+  } catch (err) {
+    console.error("Error fetching reports or generating PDF:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 module.exports = router;
