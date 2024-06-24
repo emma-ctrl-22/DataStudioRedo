@@ -76,6 +76,7 @@ const Dashboard = () => {
       link.click();
     } catch (error) {
       console.error('Error downloading PDF:', error);
+      alert('An error occurred while downloading the PDF');
     }
   };
 
