@@ -62,11 +62,11 @@ const AllReports = () => {
             <tbody>
               {reports.map((report) => (
                 <tr key={report._id} className="even:bg-blue-50">
-                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.Engineer}</td>
-                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.FacilityName}</td>
-                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.SerialNumber}</td>
-                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.type}</td>
-                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">{report.EquipmentName}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300 text-black">{report.Engineer}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300 text-black">{report.FacilityName}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300 text-black">{report.SerialNumber}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300 text-black">{report.type}</td>
+                  <td className="py-2 px-4 border-b bg-blue-100 border-gray-300 text-black">{report.EquipmentName}</td>
                   <td className="py-2 px-4 border-b bg-blue-100 border-gray-300">
                     <button className="bg-blue-500 p-1 rounded-md text-white text-sm" onClick={() => openModal(report)}>View Report</button>
                   </td>
